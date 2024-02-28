@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Exit
+  - Success
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - black
+  - Water
+  - UI
+  - white
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: background
+    uniqueID: 4225642865
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: platformer
+    uniqueID: 3552665951
+    locked: 0
+  - name: objects
+    uniqueID: 4260323987
+    locked: 0
