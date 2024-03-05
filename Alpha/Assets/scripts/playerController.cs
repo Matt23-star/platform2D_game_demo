@@ -7,12 +7,14 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Networking;
+
 
 public class playerController : MonoBehaviour
 {
-
     public Tilemap tilemap_white;
     public Tilemap tilemap_black;
+    public Tilemap tilemap_gray;
     private Rigidbody2D rb;
     public float speed = 10f;
     public float jumpForce;
@@ -24,20 +26,23 @@ public class playerController : MonoBehaviour
     private float isHurtTime = 0.5f;
     private bool isWhite = true;
 
-    
 
-    public GameObject exit;
+    //public GameObject overlapCheck;
+    public Transform groundCheck;
     public LayerMask white_ground;
     public LayerMask black_ground;
+    public LayerMask gray_ground;
+
 
     void Start()
     {
-        //deactivate the EXIT UI
-        exit.SetActive(false);
+        CapsuleCollider2D children = GetComponentInChildren<CapsuleCollider2D>();
+        //print(children.ToString());
         CheckColor();
         rb = GetComponent<Rigidbody2D>();
         Color playerColor = GetComponent<SpriteRenderer>().color;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
+        
     }
 
     // Update is called once per frame
@@ -67,15 +72,24 @@ public class playerController : MonoBehaviour
         //Jump once before landing
         if (Input.GetButtonDown("Jump"))
         {
-            if (Physics2D.IsTouching(GetComponent<CapsuleCollider2D>(), tilemap_white.GetComponent<TilemapCollider2D>()))
+            if (IsGrounded(white_ground))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
-            else if (Physics2D.IsTouching(GetComponent<CapsuleCollider2D>(), tilemap_black.GetComponent<TilemapCollider2D>()))
+            else if (IsGrounded(black_ground))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else if (IsGrounded(gray_ground))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
+    }
+
+    bool IsGrounded(LayerMask groundLayer)
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
     }
 
     void ChangeColor()
@@ -88,7 +102,7 @@ public class playerController : MonoBehaviour
             {
                 GetComponent<Renderer>().material.color = Color.black;
                 isWhite = false;
-                print("white" + CheckOverlap(white_ground).ToString());
+                //print("white" + CheckOverlap(white_ground).ToString());
                 if (CheckOverlap(white_ground))
                 {
                     Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), tilemap_white.GetComponent<TilemapCollider2D>(), true);
@@ -98,7 +112,7 @@ public class playerController : MonoBehaviour
             {
                 GetComponent<Renderer>().material.color = Color.white;
                 isWhite = true;
-                print("black" + CheckOverlap(black_ground).ToString());
+                //print("black" + CheckOverlap(black_ground).ToString());
                 if (CheckOverlap(black_ground))
                 {
                     Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), tilemap_black.GetComponent<TilemapCollider2D>(), true);
@@ -111,13 +125,12 @@ public class playerController : MonoBehaviour
     {
         if (transform.position.y <= deathY)
         {
-            RestartLevel();
+            //keep track of number of death for analytics
+            GameManager.Instance.numberOfDeath++;
+            GameManager.Instance.RestartLevel();
         }
     }
-    void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 
     void CheckColor()
     {
@@ -147,6 +160,8 @@ public class playerController : MonoBehaviour
 
     bool CheckOverlap(LayerMask ground)
     {
+
+
         CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
         if (capsuleCollider == null) return false;
 
@@ -176,6 +191,7 @@ public class playerController : MonoBehaviour
 
                 {
                     // Logic to eliminate the enemy
+                    GameManager.Instance.numberOfKills++;
                     Destroy(collision.gameObject);  // Example of eliminating the enemy
 
                     // Optionally, add a bounce effect to the player
@@ -200,6 +216,7 @@ public class playerController : MonoBehaviour
     {
         isHurt = true;
         hp -= 1;
+        GameManager.Instance.HPLost--;
         UpdateHpText();
 
         Vector2 knockbackDirection = transform.position.x < collision.gameObject.transform.position.x ? Vector2.left : Vector2.right;
@@ -207,7 +224,9 @@ public class playerController : MonoBehaviour
 
         if (hp <= 0)
         {
-            RestartLevel();
+            //keep track of number of death for analytics
+            GameManager.Instance.numberOfDeath++;
+            GameManager.Instance.RestartLevel();
         }
         else
         {
@@ -226,13 +245,7 @@ public class playerController : MonoBehaviour
         isHurt = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            exit.SetActive(true);
-            this.enabled = false;
-        }
-    }
+
+
 
 }

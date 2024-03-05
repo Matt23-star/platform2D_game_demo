@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Prototype
+  productName: Alpha
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -705,7 +705,7 @@ PlayerSettings:
   cloudProjectId: 659f8782-784d-4115-9601-052bfd3ee8f4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Prototype
+  projectName: Alpha
   organizationId: hfeng477
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
