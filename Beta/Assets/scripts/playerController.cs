@@ -34,12 +34,14 @@ public class playerController : MonoBehaviour
     public LayerMask gray_ground;
 
 
+    private float wallCheckDistance;
     void Start()
     {
         //CheckPointManager.Instance.SetCheckpoint(transform, GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>());
         CheckColor();
         rb = GetComponent<Rigidbody2D>();
         Color playerColor = GetComponent<SpriteRenderer>().color;
+        wallCheckDistance = GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
         
     }
@@ -60,6 +62,72 @@ public class playerController : MonoBehaviour
     void Move()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
+        // Check for grounded separately, using a downward raycast or an OverlapCircle at the player's feet position.
+        //bool isGrounded = IsGrounded(white_ground | black_ground | gray_ground); // Assuming IsGrounded() is defined elsewhere in your code.
+
+        //LayerMask combinedLayer = gray_ground;
+        //if (isWhite)
+        //{
+        //    combinedLayer |= black_ground;
+        //}
+        //else
+        //{
+        //    combinedLayer |= white_ground;
+        //}
+
+        //// Only set ray length based on buffer
+        //float rayLength = wallCheckDistance + 0.1f; // Slight buffer to account for movement
+
+        //// Offset for starting the raycasts just inside the player's collider edge
+        //float colliderEdgeOffset = GetComponent<CapsuleCollider2D>().size.x / 2 * transform.localScale.x;
+
+        //// Cast rays only if there's horizontal input and the player is not grounded
+        //if (!Mathf.Approximately(horizontalMove, 0) && !isGrounded)
+        //{
+        //    Vector2 direction = horizontalMove > 0 ? Vector2.right : Vector2.left;
+        //    Vector2 positionOffset = new Vector2(colliderEdgeOffset * (horizontalMove > 0 ? 1 : -1), 0);
+        //    Vector2 rayOriginTop = new Vector2(transform.position.x, transform.position.y + GetComponent<CapsuleCollider2D>().size.y / 2) + positionOffset;
+        //    Vector2 rayOriginBottom = new Vector2(transform.position.x, transform.position.y - GetComponent<CapsuleCollider2D>().size.y / 2) + positionOffset;
+
+        //    RaycastHit2D hitTop = Physics2D.Raycast(rayOriginTop, direction, rayLength, combinedLayer);
+        //    RaycastHit2D hitBottom = Physics2D.Raycast(rayOriginBottom, direction, rayLength, combinedLayer);
+
+        //    // Check if any of the rays hit a wall
+        //    if (hitTop.collider != null || hitBottom.collider != null)
+        //    {
+        //        // There's a wall, so don't move horizontally
+        //        horizontalMove = 0;
+        //    }
+        //}
+
+        //// Apply horizontal movement only if the player is grounded or there is horizontal input
+        //if (isGrounded || !Mathf.Approximately(horizontalMove, 0))
+        //{
+        //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        //}
+
+        //// Check for a wall on the right
+        //if (horizontalMove > 0 && Physics2D.Raycast(transform.position, Vector2.right, wallCheckDistance, combinedLayer))
+        //{
+        //    // There's a wall to the right, so don't move right
+        //    horizontalMove = 0;
+        //}
+
+        //// Check for a wall on the left
+        //if (horizontalMove < 0 && Physics2D.Raycast(transform.position, Vector2.left, wallCheckDistance, combinedLayer))
+        //{
+        //    // There's a wall to the left, so don't move left
+        //    horizontalMove = 0;
+        //}
+
+        //// Apply movement
+        //rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        //if (horizontalMove != 0)
+        //{
+        //    //rb.velocity = new Vector2 (horizontalMove * speed * Time.deltaTime, rb.velocity.y);
+        //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        //}
+
         if (horizontalMove != 0)
         {
             rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
