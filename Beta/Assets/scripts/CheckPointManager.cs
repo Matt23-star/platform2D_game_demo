@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckPointManager : MonoBehaviour
 {
     public static CheckPointManager Instance { get; private set; }
-    private Transform currentCheckpoint;
+    private Vector3 currentCheckpoint;
     private Renderer currentRenderer;
 
     private void Awake()
@@ -24,7 +24,7 @@ public class CheckPointManager : MonoBehaviour
         }
     }
 
-    public void SetCheckpoint(Transform checkpoint, Renderer renderer)
+    public void SetCheckpoint(Vector3 checkpoint, Renderer renderer)
     {
         currentCheckpoint = checkpoint;
         currentRenderer = renderer;
@@ -34,8 +34,8 @@ public class CheckPointManager : MonoBehaviour
     {
         if (currentCheckpoint != null)
         {
-            player.transform.position = currentCheckpoint.position;
-            player.GetComponent<SpriteRenderer>().color = currentRenderer.material.color;
+            player.transform.position = currentCheckpoint;
+            player.GetComponent<SpriteRenderer>().material.color = currentRenderer.material.color;
         }
     }
 }

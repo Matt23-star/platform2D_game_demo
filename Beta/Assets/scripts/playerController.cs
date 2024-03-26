@@ -43,7 +43,8 @@ public class playerController : MonoBehaviour
         Color playerColor = GetComponent<SpriteRenderer>().color;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
 
-        CheckPointManager.Instance.SetCheckpoint(transform, GetComponent<Renderer>());
+
+        CheckPointManager.Instance.SetCheckpoint(transform.position, GetComponent<Renderer>());
 
     }
 
