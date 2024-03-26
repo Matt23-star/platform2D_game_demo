@@ -18,6 +18,10 @@ public class BulletFire : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("platform"))
+        {
+            Physics2D.IgnoreCollision(this.gameObject.GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
+        }
         if (collision.gameObject.CompareTag("Block"))
         {
             if (collision.gameObject.GetComponent<SpriteRenderer>().color == Color.black)
