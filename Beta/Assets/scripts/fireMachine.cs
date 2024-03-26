@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class fireMachine : MonoBehaviour
 {
-    public GameObject bullet;
+    public GameObject block;
     public float timeInterval;
     private int colorIndex;
     //public float block_x;
@@ -54,11 +54,11 @@ public class fireMachine : MonoBehaviour
 
 
 
-            bullet.GetComponent<SpriteRenderer>().color = color[colorIndex];
+            block.GetComponent<SpriteRenderer>().color = color[colorIndex];
             //bullet.GetComponent<SpriteRenderer>().size = new Vector2(block_x, block_y);
 
            
-            Instantiate(bullet,this.transform.position,this.transform.rotation);
+            Instantiate(block,this.transform.position,this.transform.rotation);
 
             time = 0;
         }

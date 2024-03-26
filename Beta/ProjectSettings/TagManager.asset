@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Success
   - Instructions
+  - Block
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - white
   - gray
-  - 
+  - block
   - 
   - 
   - 

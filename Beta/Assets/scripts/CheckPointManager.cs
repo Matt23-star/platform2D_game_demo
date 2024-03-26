@@ -35,7 +35,8 @@ public class CheckPointManager : MonoBehaviour
         if (currentCheckpoint != null)
         {
             player.transform.position = currentCheckpoint;
-            player.GetComponent<SpriteRenderer>().material.color = currentColor;
+            player.GetComponent<SpriteRenderer>().color = currentColor;
+            //player.GetComponent<SpriteRenderer>().color = currentColor;
         }
     }
 }

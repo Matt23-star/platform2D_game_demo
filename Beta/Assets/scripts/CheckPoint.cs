@@ -9,8 +9,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            CheckPointManager.Instance.SetCheckpoint(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>().material.color);
-            print("Checkpoint reached"+ transform.IsUnityNull());
+            CheckPointManager.Instance.SetCheckpoint(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().color);
         }
     }
 }

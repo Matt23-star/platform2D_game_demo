@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf739d3d982bd242af07e4c9f9e206e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2454411476804144883, guid: 0ee4d731d24cf3b4c8f8547a4ba3e050, type: 3}
+  block: {fileID: 2454411476804144883, guid: 0ee4d731d24cf3b4c8f8547a4ba3e050, type: 3}
   timeInterval: 1
-  colorIndex: 0
-  block_x: 0.5
-  block_y: 0.5
+  onlyGray: 0
+  delay: 0
+  startDelay: 0

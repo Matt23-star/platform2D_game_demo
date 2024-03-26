@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour
     private bool isHurt = false;
     private float isHurtTime = 0.5f;
     private bool isWhite = true;
+    public GameObject bulletPrefab;
 
 
     //public GameObject overlapCheck;
@@ -33,7 +34,7 @@ public class playerController : MonoBehaviour
     public LayerMask white_ground;
     public LayerMask black_ground;
     public LayerMask gray_ground;
-
+    private float bulletSpeed = 10f;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class playerController : MonoBehaviour
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
 
 
-        CheckPointManager.Instance.SetCheckpoint(transform.position, GetComponent<Renderer>().material.color);
+        CheckPointManager.Instance.SetCheckpoint(transform.position, playerColor);
 
     }
 
@@ -58,6 +59,10 @@ public class playerController : MonoBehaviour
         ChangeColor();
         CheckDeath();
         CheckColor();
+
+
+        Shoot();
+       
     }
 
     //Realize Move and Jump
@@ -186,7 +191,7 @@ public class playerController : MonoBehaviour
         {
             if (isWhite)
             {
-                GetComponent<Renderer>().material.color = Color.black;
+                GetComponent<SpriteRenderer>().color = Color.black;
                 isWhite = false;
                 // print("white" + CheckOverlap(white_ground).ToString());
                 if (CheckOverlap(white_ground))
@@ -197,7 +202,7 @@ public class playerController : MonoBehaviour
             }
             else
             {
-                GetComponent<Renderer>().material.color = Color.white;
+                GetComponent<SpriteRenderer>().color = Color.white;
                 isWhite = true;
                 // print("black" + CheckOverlap(black_ground).ToString());
                 if (CheckOverlap(black_ground))
@@ -210,15 +215,6 @@ public class playerController : MonoBehaviour
     }
 
 
-    void CheckDeath()
-    {
-        if (transform.position.y <= deathY)
-        {
-            //keep track of number of death for analytics
-            GameManager.Instance.numberOfDeath++;
-            CheckPointManager.Instance.RespawnPlayer(this.gameObject);
-        }
-    }
 
 
     void CheckColor()
@@ -330,6 +326,17 @@ public class playerController : MonoBehaviour
 
     }
 
+
+    void CheckDeath()
+    {
+        if (transform.position.y <= deathY)
+        {
+            //keep track of number of death for analytics
+            GameManager.Instance.numberOfDeath++;
+            CheckPointManager.Instance.RespawnPlayer(this.gameObject);
+        }
+    }
+
     private void ApplyDamage(Collision2D collision)
     {
         isHurt = true;
@@ -364,6 +371,30 @@ public class playerController : MonoBehaviour
     }
 
 
+    //shot bullet for a distance
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Shot"))
+        {
+            if (isWhite)
+            {
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
+            }
+            else
+            {
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+
+            Vector3 position = transform.position + transform.right; // Generate bullet position relative to transform's position
+            GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = transform.right * bulletSpeed;
+
+            // Destroy the bullet after 5 seconds
+            Destroy(bullet, 5f);
+        }
+    }
 
 
 }
