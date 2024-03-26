@@ -4755,11 +4755,14 @@ PrefabInstance:
       addedObject: {fileID: 1809220204}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+<<<<<<< HEAD
 --- !u!224 &1006227708 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1461328794601338721, guid: dd10171094bb808419b12e0d472617a7, type: 3}
   m_PrefabInstance: {fileID: 839630698}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> 5e50639f59107350d1169ada6aabb99cd9c218aa
 --- !u!114 &1083303374 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3842758680787976495, guid: dd10171094bb808419b12e0d472617a7, type: 3}
@@ -4781,12 +4784,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 435835956375095088, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435835956375095088, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 6200000, guid: 1648e8fd212c0074e87263c461308141, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2715251522709688231, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_Material
       value: 
