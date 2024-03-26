@@ -12,8 +12,7 @@ public class CheckPointManager : MonoBehaviour
     {
         // Singleton pattern to ensure only one instance exists.
         Debug.Log(Instance == null ? "Instance is null" : "Instance is not null");
-        currentCheckpoint = GameObject.FindGameObjectWithTag("Player").transform;
-        currentRenderer = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
+
         if (Instance == null)
         {
             Instance = this;

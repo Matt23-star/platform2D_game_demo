@@ -35,16 +35,16 @@ public class playerController : MonoBehaviour
     public LayerMask gray_ground;
 
 
-    private float wallCheckDistance;
     void Start()
     {
         //CheckPointManager.Instance.SetCheckpoint(transform, GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>());
         CheckColor();
         rb = GetComponent<Rigidbody2D>();
         Color playerColor = GetComponent<SpriteRenderer>().color;
-        wallCheckDistance = GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
-        
+
+        CheckPointManager.Instance.SetCheckpoint(transform, GetComponent<Renderer>());
+
     }
 
     // Update is called once per frame
@@ -129,7 +129,7 @@ public class playerController : MonoBehaviour
         //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
         //}
 
-        if (!IsWallAhead(Vector2.right * horizontalMove))
+        if (horizontalMove!=0)
         {
             rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
         } 
@@ -153,25 +153,25 @@ public class playerController : MonoBehaviour
         }
     }
 
-    bool IsWallAhead(Vector2 direction)
-    {
-        // Perform a raycast in the direction of movement
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, gray_ground);
-        if (hit.collider == null)
-        {
-            if(CheckOverlap(white_ground))
-                hit = Physics2D.Raycast(transform.position, direction, 1f, black_ground);
-        }
+    //bool IsWallAhead(Vector2 direction)
+    //{
+    //    // Perform a raycast in the direction of movement
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, gray_ground);
+    //    if (hit.collider == null)
+    //    {
+    //        if(CheckOverlap(white_ground))
+    //            hit = Physics2D.Raycast(transform.position, direction, 1f, black_ground);
+    //    }
 
-        if (hit.collider == null)
-        {
-            if (CheckOverlap(black_ground))
-                hit = Physics2D.Raycast(transform.position, direction, 1f, white_ground);
-        }
+    //    if (hit.collider == null)
+    //    {
+    //        if (CheckOverlap(black_ground))
+    //            hit = Physics2D.Raycast(transform.position, direction, 1f, white_ground);
+    //    }
 
-        // If the raycast hits a wall, return true
-        return hit.collider != null;
-    }
+    //    // If the raycast hits a wall, return true
+    //    return hit.collider != null;
+    //}
 
     bool IsGrounded(LayerMask groundLayer)
     {
@@ -191,6 +191,7 @@ public class playerController : MonoBehaviour
                 if (CheckOverlap(white_ground))
                 {
                     Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), tilemap_white.GetComponent<TilemapCollider2D>(), true);
+                    Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), tilemap_white.GetComponent<TilemapCollider2D>(), true);
                 }
             }
             else
@@ -201,6 +202,7 @@ public class playerController : MonoBehaviour
                 if (CheckOverlap(black_ground))
                 {
                     Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), tilemap_black.GetComponent<TilemapCollider2D>(), true);
+                    Physics2D.IgnoreCollision(GetComponent<CapsuleCollider2D>(), tilemap_black.GetComponent<TilemapCollider2D>(), true);
                 }
             }
         }
@@ -221,26 +223,39 @@ public class playerController : MonoBehaviour
     void CheckColor()
     {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
 
         if (!isWhite)
         {
             Physics2D.IgnoreCollision(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>(), true);
-
+            Physics2D.IgnoreCollision(capsuleCollider, tilemap_black.GetComponent<TilemapCollider2D>(), true);
             if (!CheckOverlap(white_ground))
+            {
                 Physics2D.IgnoreCollision(boxCollider, tilemap_white.GetComponent<TilemapCollider2D>(), false);
+                Physics2D.IgnoreCollision(capsuleCollider, tilemap_white.GetComponent<TilemapCollider2D>(), false);
+            }
 
             if (Physics2D.IsTouching(boxCollider, tilemap_white.GetComponent<TilemapCollider2D>()))
+            {
                 Physics2D.IgnoreCollision(boxCollider, tilemap_white.GetComponent<TilemapCollider2D>(), false);
+                Physics2D.IgnoreCollision(capsuleCollider, tilemap_white.GetComponent<TilemapCollider2D>(), false);
+            }
         }
         else
         {
             Physics2D.IgnoreCollision(boxCollider, tilemap_white.GetComponent<TilemapCollider2D>(), true);
+            Physics2D.IgnoreCollision(capsuleCollider, tilemap_white.GetComponent<TilemapCollider2D>(), true);
 
             if (!CheckOverlap(black_ground))
+            {
                 Physics2D.IgnoreCollision(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>(), false);
-
+                Physics2D.IgnoreCollision(capsuleCollider, tilemap_black.GetComponent<TilemapCollider2D>(), false);
+            }
             if (Physics2D.IsTouching(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>()))
+            {
                 Physics2D.IgnoreCollision(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>(), false);
+                Physics2D.IgnoreCollision(capsuleCollider, tilemap_black.GetComponent<TilemapCollider2D>(), false);
+            }
         }
     }
 
@@ -264,12 +279,17 @@ public class playerController : MonoBehaviour
     bool CheckOverlap(LayerMask ground)
     {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-        if (boxCollider == null) return false;
+        CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
+        if (boxCollider == null || capsuleCollider == null) return false;
+
+        CapsuleDirection2D direction = capsuleCollider.direction;
 
         float angle = transform.eulerAngles.z;
         // Adjust the position if needed
-        Collider2D overlapCollider = Physics2D.OverlapBox(boxCollider.bounds.center, boxCollider.size, angle, ground);
-        if (overlapCollider == null) return false;
+        Collider2D overlapCollider1 = Physics2D.OverlapBox(boxCollider.bounds.center, boxCollider.size, angle, ground);
+        //find bug. the position lower than observed postion
+        Collider2D overlapCollider2 = Physics2D.OverlapCapsule(capsuleCollider.bounds.center, capsuleCollider.size, direction, angle, ground);
+        if (overlapCollider1 == null && overlapCollider2==null) return false;
         return true;
     }
 
