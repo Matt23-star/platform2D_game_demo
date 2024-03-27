@@ -2729,12 +2729,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
+      propertyPath: block
+      value: 
+      objectReference: {fileID: 7021693970335698935, guid: 07ca6d77c02b4344da3c1c0715021c72, type: 3}
+    - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 7021693970335698935, guid: 07ca6d77c02b4344da3c1c0715021c72, type: 3}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: onlyGray
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: timeInterval
@@ -3581,6 +3585,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
+      propertyPath: block
+      value: 
+      objectReference: {fileID: 6046459456182435009, guid: e97db5c9c1826fe4c8910e470848ccb9, type: 3}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: bullet
       value: 
@@ -5383,6 +5391,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
+      propertyPath: block
+      value: 
+      objectReference: {fileID: 7021693970335698935, guid: 07ca6d77c02b4344da3c1c0715021c72, type: 3}
+    - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: delay
       value: 1
       objectReference: {fileID: 0}
@@ -6417,6 +6429,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
+      propertyPath: block
+      value: 
+      objectReference: {fileID: 6046459456182435009, guid: e97db5c9c1826fe4c8910e470848ccb9, type: 3}
     - target: {fileID: 2575582095473694086, guid: 7c1ba4a4d3afe024a8cdf6794306dd79, type: 3}
       propertyPath: bullet
       value: 
