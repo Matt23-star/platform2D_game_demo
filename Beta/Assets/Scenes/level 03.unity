@@ -4744,9 +4744,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 365978739832015932, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_text
+      value: 'Reach to the Green Endpoint and Use the Yellow Checkpoint
+
+        Try
+        to use <J> to color the blocks'
+      objectReference: {fileID: 0}
     - target: {fileID: 406815647604111021, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870581639296803448, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_text
+      value: '   The player can shoot pigments by key <J> to change blocks'' colors'
       objectReference: {fileID: 0}
     - target: {fileID: 1461328794601338721, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_Pivot.x
@@ -5268,7 +5279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_Tiles.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileAssetArray.Array.size
@@ -8620,11 +8631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileAssetArray.Array.data[2].m_RefCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileColorArray.Array.data[0].m_RefCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_Tiles.Array.data[10].second.m_TileIndex
@@ -9048,7 +9059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileMatrixArray.Array.data[0].m_RefCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_RefCount
@@ -9056,7 +9067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_RefCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_RefCount
@@ -25050,12 +25061,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8764112972746349631, guid: 846d0536a663a1a40b0803454bdb78b6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764112972746349631, guid: 846d0536a663a1a40b0803454bdb78b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 8764112972746349631, guid: 846d0536a663a1a40b0803454bdb78b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.06
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8764112972746349631, guid: 846d0536a663a1a40b0803454bdb78b6, type: 3}
       propertyPath: m_LocalPosition.z
