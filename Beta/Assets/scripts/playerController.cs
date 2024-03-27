@@ -34,6 +34,7 @@ public class playerController : MonoBehaviour
     public LayerMask white_ground;
     public LayerMask black_ground;
     public LayerMask gray_ground;
+    public LayerMask block;
     private float bulletSpeed = 10f;
 
     void Start()
@@ -60,8 +61,11 @@ public class playerController : MonoBehaviour
         CheckDeath();
         CheckColor();
 
+        if (SceneManager.GetActiveScene().buildIndex >= 4)
+        {
+            Shoot();
+        }
 
-        Shoot();
        
     }
 
@@ -153,6 +157,10 @@ public class playerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
             else if (IsGrounded(gray_ground))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+            else if (IsGrounded(block))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }

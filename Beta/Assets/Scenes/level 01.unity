@@ -9902,6 +9902,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: block.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: tilemap_black
       value: 
       objectReference: {fileID: 1096919871}
@@ -9911,11 +9915,11 @@ PrefabInstance:
       objectReference: {fileID: 1485155751}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.2
+      value: -16.7
       objectReference: {fileID: 0}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.38
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.z

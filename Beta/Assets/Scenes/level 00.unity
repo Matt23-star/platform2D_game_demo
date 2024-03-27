@@ -5051,6 +5051,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 211848030}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: block.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: overlapCheck
       value: 
       objectReference: {fileID: 0}

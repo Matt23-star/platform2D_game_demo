@@ -24,7 +24,7 @@ public class EnvironmentController : MonoBehaviour
     void Update()
     {
         CheckPlayerColor();
-        CheckColor();
+        CheckPlatformColor();
     }
 
     void CheckPlayerColor()
@@ -45,7 +45,7 @@ public class EnvironmentController : MonoBehaviour
         }
     }
 
-    void CheckColor()
+    void CheckPlatformColor()
     {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
 
@@ -72,6 +72,30 @@ public class EnvironmentController : MonoBehaviour
             if (Physics2D.IsTouching(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>()))
             {
                 Physics2D.IgnoreCollision(boxCollider, tilemap_black.GetComponent<TilemapCollider2D>(), false);
+            }
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+            BoxCollider2D boxCollider2 = collision.gameObject.GetComponent<BoxCollider2D>();
+            if (GetComponent<SpriteRenderer>().color == collision.gameObject.GetComponent<SpriteRenderer>().color)
+            {
+                if (Physics2D.IsTouching(boxCollider, boxCollider2))
+                {
+                    Physics2D.IgnoreCollision(boxCollider, boxCollider2, true);
+                }
+            }
+            else
+            {
+                if (Physics2D.IsTouching(boxCollider, boxCollider2))
+                {
+                    Physics2D.IgnoreCollision(boxCollider, boxCollider2, false);
+                }
             }
         }
     }
