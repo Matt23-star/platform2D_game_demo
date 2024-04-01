@@ -6,7 +6,7 @@ public class CheckPointManager : MonoBehaviour
 {
     public static CheckPointManager Instance { get; private set; }
     private Vector3 currentCheckpoint;
-    private Color currentColor;
+    //private Color currentColor;
 
     private void Awake()
     {
@@ -24,10 +24,10 @@ public class CheckPointManager : MonoBehaviour
         }
     }
 
-    public void SetCheckpoint(Vector3 checkpoint, Color color)
+    public void SetCheckpoint(Vector3 checkpoint/*, Color color*/)
     {
         currentCheckpoint = checkpoint;
-        currentColor = color;
+        //currentColor = color;
     }
 
     public void RespawnPlayer(GameObject player)
@@ -35,7 +35,7 @@ public class CheckPointManager : MonoBehaviour
         if (currentCheckpoint != null)
         {
             player.transform.position = currentCheckpoint;
-            player.GetComponent<SpriteRenderer>().color = currentColor;
+            //player.GetComponent<SpriteRenderer>().color = currentColor;
             //player.GetComponent<SpriteRenderer>().color = currentColor;
         }
     }

@@ -44,9 +44,7 @@ public class playerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Color playerColor = GetComponent<SpriteRenderer>().color;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
-
-
-        CheckPointManager.Instance.SetCheckpoint(transform.position, playerColor);
+        CheckPointManager.Instance.SetCheckpoint(transform.position/*, playerColor*/);
 
     }
 
@@ -341,6 +339,7 @@ public class playerController : MonoBehaviour
         {
             //keep track of number of death for analytics
             GameManager.Instance.numberOfDeath++;
+            //GameManager.Instance.RestartLevel();
             CheckPointManager.Instance.RespawnPlayer(this.gameObject);
         }
     }
@@ -359,6 +358,7 @@ public class playerController : MonoBehaviour
         {
             //keep track of number of death for analytics
             GameManager.Instance.numberOfDeath++;
+            //GameManager.Instance.RestartLevel();
             CheckPointManager.Instance.RespawnPlayer(gameObject);
         }
         else
