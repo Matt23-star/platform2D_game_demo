@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
+      propertyPath: checkpointText
+      value: 
+      objectReference: {fileID: 1451950011}
     - target: {fileID: 7821738053645218418, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: m_Name
       value: CheckPoint
@@ -3045,11 +3049,11 @@ PrefabInstance:
       objectReference: {fileID: 1658798174}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.44
+      value: -46.67
       objectReference: {fileID: 0}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: 16.58
       objectReference: {fileID: 0}
     - target: {fileID: 8109481685347155760, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3571,6 +3575,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+--- !u!114 &1451950011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2405747211516870309, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+  m_PrefabInstance: {fileID: 1428824943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1465322459
 GameObject:
   m_ObjectHideFlags: 0
