@@ -5465,7 +5465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: deathY
-      value: -20
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: hpText
@@ -5591,18 +5591,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33927245ba74134ebc1040c2c5a4e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfDeathLv0: 0
-  numberOfDeathLv1: 0
-  numberOfDeathLv2: 0
-  HPRemainLv0: 0
-  HPRemainLv1: 0
-  HPRemainLv2: 0
-  timeLv0: 0
+  CPPRLv1Ans: 0
+  CPPRLv2Ans1: 0
+  CPPRLv2Ans2: 0
+  CPPRLv3Ans1: 0
+  CPPRLv3Ans2: 0
+  CPPRLv4Ans: 0
   timeLv1: 0
-  timeLv2: 0
-  killsLv0: 0
-  killsLv1: 0
-  killsLv2: 0
+  time1Lv2: 0
+  time2Lv2: 0
+  time1Lv3: 0
+  time2Lv3: 0
+  timeLv4: 0
+  DeathLocLv1: {x: 0, y: 0}
+  DeathLocLv2: {x: 0, y: 0}
+  DeathLocLv3: {x: 0, y: 0}
+  DeathLocLv4: {x: 0, y: 0}
 --- !u!4 &1595502943
 Transform:
   m_ObjectHideFlags: 0

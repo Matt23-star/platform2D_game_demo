@@ -19,7 +19,7 @@ public class playerController : MonoBehaviour
     private Rigidbody2D rb;
     public float speed = 10f;
     public float jumpForce;
-    public float deathY = -10f;
+    public float deathY;
     public TextMeshProUGUI hpText;
     private int hp = 3;
     private float knockbackForce = 5f;
