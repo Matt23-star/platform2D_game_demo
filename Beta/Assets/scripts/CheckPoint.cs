@@ -2,9 +2,11 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
+
 public class CheckPoint : MonoBehaviour
 {
     public TextMeshProUGUI checkpointText;
+    private bool isNotReachedBefore = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,11 +15,21 @@ public class CheckPoint : MonoBehaviour
             // CheckPointManager.Instance.SetCheckpoint(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().color);
             CheckPointManager.Instance.SetCheckpoint(transform.position);
             StartCoroutine(ShowAndFadeCheckpointMessage()); // Show and fade the checkpoint message
+            if (isNotReachedBefore)
+            {
+                isNotReachedBefore=false;
+                // Accessing the timer from GameManager and logging the time
+                float elapsedTime = GameManager.Instance.SetCheckpointTime();
+                Analytics.Instance.CollectDataCToCTime(elapsedTime, "Checkpoint");
+                Debug.Log($"Time to reach checkpoint: {elapsedTime} seconds");
+                Analytics.Instance.Send("CToCTimeCheckpoint");
+            }
         }
     }
 
     IEnumerator ShowAndFadeCheckpointMessage()
     {
+        if(!isNotReachedBefore) { yield break; }
         checkpointText.text = "Checkpoint reached!"; // Set the text
         checkpointText.alpha = 1; // Make sure the text is fully visible
 

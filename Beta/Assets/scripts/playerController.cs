@@ -27,6 +27,7 @@ public class playerController : MonoBehaviour
     private float isHurtTime = 0.5f;
     private bool isWhite = true;
     public GameObject bulletPrefab;
+    private bool isDie = false;
 
 
     //public GameObject overlapCheck;
@@ -350,18 +351,14 @@ public class playerController : MonoBehaviour
         {
             //Debug.Log($"Player Y Position: {transform.position.y}, DeathY: {deathY}");
             // Record and send the deathLocation
-            if (Analytics.Instance != null)
+            if (!isDie)
             {
-                //Debug.Log($"Analytics Instance: {Analytics.Instance}");
+                isDie = true;
                 Analytics.Instance.CollectDataDeathLoc(transform.position);
+                Analytics.Instance.Send("LocationOfDeath");
             }
-            else
-            {
-                Debug.Log("Analytics instance is null.");
-            }
-            Analytics.Instance.Send("LocationOfDeath");
             //GameManager.Instance.RestartLevel();
-            CheckPointManager.Instance.RespawnPlayer(this.gameObject);
+            RespawnPlayer();
         }
     }
 
@@ -377,10 +374,14 @@ public class playerController : MonoBehaviour
         if (hp <= 0)
         {
             // Record and send the deathLocation
-            Analytics.Instance.CollectDataDeathLoc(transform.position);
-            Analytics.Instance.Send("LocationOfDeath");
+            //if(!isDie)
+            //{
+            //    isDie = true;
+            //    Analytics.Instance.CollectDataDeathLoc(transform.position);
+            //    Analytics.Instance.Send("LocationOfDeath");
+            //}
             //GameManager.Instance.RestartLevel();
-            CheckPointManager.Instance.RespawnPlayer(gameObject);
+            RespawnPlayer();
             hp = 3;
             UpdateHpText();
         }
@@ -399,6 +400,14 @@ public class playerController : MonoBehaviour
     {
         yield return new WaitForSeconds(isHurtTime);
         isHurt = false;
+    }
+
+    // Delay the respawn time to avoid bug
+    void  RespawnPlayer()
+    {
+        isDie = false;
+        CheckPointManager.Instance.RespawnPlayer(gameObject);
+        
     }
 
 

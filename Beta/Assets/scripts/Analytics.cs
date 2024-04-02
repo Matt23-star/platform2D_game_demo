@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Analytics : MonoBehaviour
 {
-    private string CurrentScene;
     public static Analytics Instance { get; private set; }
     // Death Analytics declare
     
@@ -31,12 +30,12 @@ public class Analytics : MonoBehaviour
     private string CPPRLv4Entry = "entry.836668042";
 
     // time to beat each level
-    [HideInInspector] public float timeLv1;
-    [HideInInspector] public float time1Lv2;
-    [HideInInspector] public float time2Lv2;
-    [HideInInspector] public float time1Lv3;
-    [HideInInspector] public float time2Lv3;
-    [HideInInspector] public float timeLv4;
+    private float timeLv1;
+    private float time1Lv2;
+    private float time2Lv2;
+    private float time1Lv3;
+    private float time2Lv3;
+    private float timeLv4;
     private string level1Time = "entry.646782995";
     private string level2Time1 = "entry.991249842";
     private string level2Time2 = "entry.218118490";
@@ -45,10 +44,10 @@ public class Analytics : MonoBehaviour
     private string level4Time = "entry.1592600164";
 
     // number of enemy kills
-    [HideInInspector] public Vector2 DeathLocLv1;
-    [HideInInspector] public Vector2 DeathLocLv2;
-    [HideInInspector] public Vector2 DeathLocLv3;
-    [HideInInspector] public Vector2 DeathLocLv4;
+    private Vector2 DeathLocLv1;
+    private Vector2 DeathLocLv2;
+    private Vector2 DeathLocLv3;
+    private Vector2 DeathLocLv4;
     private string level1DL = "entry.1104684653";
     private string level2DL = "entry.1332899930";
     private string level3DL = "entry.42495865";
@@ -71,17 +70,13 @@ public class Analytics : MonoBehaviour
         
     }
 
-    void Start()
-    {
-        CurrentScene = SceneManager.GetActiveScene().name;
-    }
-
     public void Send(string s)
     {
 
         if (s.Equals("EnemykillingRate")) { StartCoroutine(EnemykillingRate()); }
         if (s.Equals("CheckPointPassRate")) { StartCoroutine(CheckPointPassRate()); }
-        if (s.Equals("CToCTime")) { StartCoroutine(CToCTime()); }
+        if (s.Equals("CToCTimeCheckpoint")) { StartCoroutine(CToCTime("Checkpoint")); }
+        if (s.Equals("CToCTimeEndpoint")) { StartCoroutine(CToCTime("Endpoint")); }
         if (s.Equals("LocationOfDeath")) { StartCoroutine(LocationOfDeath()); }
     }
     //Death analytics
@@ -90,7 +85,7 @@ public class Analytics : MonoBehaviour
         string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSc3UW934jfnkVFyYoFKqwbAJ0U8d4Q2EVg-e5WUDymdTaH3bw/formResponse";
         WWWForm form = new WWWForm();
 
-        switch (CurrentScene)
+        switch (GameManager.Instance.currentLevelName)
         {
             case "level 01":
                 form.AddField(EKRLv2Entry, EKRLv2Ans);
@@ -151,24 +146,31 @@ public class Analytics : MonoBehaviour
     }
 
     //  Record the time it takes between two checkpoints
-    IEnumerator CToCTime()
+    IEnumerator CToCTime(string checkpointOrEndpoint)
     {
         string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSdLXgnazr4zswDYlAIafn68uRogcjaqautxODUFKrlxjUgFmA/formResponse";
         WWWForm form = new WWWForm();
-        
-            
-        form.AddField(level1Time, timeLv1.ToString());
-            
-        form.AddField(level2Time1, time1Lv2.ToString());
-                
-        form.AddField(level2Time2, time2Lv2.ToString());
 
-        form.AddField(level3Time1, time1Lv3.ToString());
+        switch (GameManager.Instance.currentLevelName)
+        {
+            case "level 00":
+                form.AddField(level1Time, timeLv1.ToString());
+                break;
 
-        form.AddField(level3Time2, time2Lv3.ToString());
+            case "level 01":
+                if(checkpointOrEndpoint.Equals("Checkpoint")) form.AddField(level2Time1, time1Lv2.ToString());
+                if (checkpointOrEndpoint.Equals("Endpoint")) form.AddField(level2Time2, time2Lv2.ToString());
+                break;
 
-        form.AddField(level4Time, timeLv4.ToString());
-                
+            case "level 02":
+                if (checkpointOrEndpoint.Equals("Checkpoint")) form.AddField(level3Time1, time1Lv3.ToString());
+                if (checkpointOrEndpoint.Equals("Endpoint")) form.AddField(level3Time2, time2Lv3.ToString());
+                break;
+
+            case "level 03":
+                form.AddField(level4Time, timeLv4.ToString());
+                break;
+        }
         
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
@@ -189,7 +191,7 @@ public class Analytics : MonoBehaviour
     {
         string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScEbBZoqKhe0AU9aExqvH3hDHuOyfDd42FxqWNsSUooPdFfSQ/formResponse";
         WWWForm form = new WWWForm();
-        switch (CurrentScene)
+        switch (GameManager.Instance.currentLevelName)
         {
             case "level 00":
                 form.AddField(level1DL, DeathLocLv1.ToString());
@@ -224,8 +226,8 @@ public class Analytics : MonoBehaviour
 
     public void CollectDataDeathLoc(Vector2 DeathLoc)
     {
-        Debug.Log("CollectDataDeathLoc started.");
-        switch (CurrentScene)
+        // Debug.Log("CollectDataDeathLoc started.");
+        switch (GameManager.Instance.currentLevelName)
         {
             case "level 00":
                 DeathLocLv1 = DeathLoc;
@@ -247,13 +249,13 @@ public class Analytics : MonoBehaviour
                 Debug.Log("DeathLocLv4 recorded!");
                 break;
         }
-        Debug.Log("CollectDataDeathLoc completed.");
+       // Debug.Log("CollectDataDeathLoc completed.");
     }
 
     public void CollectDataEnemyName(string Name)
     {
-        Debug.Log("CollectDataEnemyName started.");
-        switch (CurrentScene)
+        //Debug.Log("CollectDataEnemyName started.");
+        switch (GameManager.Instance.currentLevelName)
         {
             case "level 01":
                 EKRLv2Ans = Name;
@@ -265,6 +267,49 @@ public class Analytics : MonoBehaviour
                 Debug.Log($"EKRLv3Ans: {EKRLv3Ans} recorded!");
                 break;
         }
-        Debug.Log("CollectDataEnemyName completed.");
+        //Debug.Log("CollectDataEnemyName completed.");
+    }
+
+    public void CollectDataCToCTime(float time, string checkpointOrEndpoint)
+    {
+        switch (GameManager.Instance.currentLevelName)
+        {
+            case "level 00":
+                if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    timeLv1 = time;
+                }
+                break;
+
+            case "level 01":
+                if (checkpointOrEndpoint.Equals("Checkpoint"))
+                {
+                    time1Lv2 = time;
+                }
+                else if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    time2Lv2 = time;
+                }
+                break;
+
+            case "level 02":
+                if (checkpointOrEndpoint.Equals("Checkpoint"))
+                {
+                    time1Lv3 = time;
+                }
+                else if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    time2Lv3 = time;
+                }
+                break;
+
+            case "level 03":
+                if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    timeLv4 = time;
+                }
+                break;
+
+        }
     }
 }

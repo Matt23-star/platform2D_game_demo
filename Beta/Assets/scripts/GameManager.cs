@@ -9,11 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     // Variables for analytics
-    [HideInInspector] public int numberOfDeath;
-    [HideInInspector] public int HPLost;
     [HideInInspector] public float timer;
+    [HideInInspector] public float checkpointTime;
     [HideInInspector] public string currentLevelName;
-    [HideInInspector] public int numberOfKills;
     
 
     private void Awake()
@@ -40,15 +38,11 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         // Initialize current level name
         currentLevelName = SceneManager.GetActiveScene().name;
-        // Initialize death count
-        numberOfDeath = 0;
-        // Initilize HP Lost
-        HPLost = 0;
         // Initialize timer
         timer = 0f;
-        // Initialize kills
-        numberOfKills = 0;
-        
+        checkpointTime = 0f;
+
+
     }
 
     private void Update()
@@ -62,11 +56,8 @@ public class GameManager : MonoBehaviour
         // Reset numberOfDeath when a new level is loaded, not on reloads
         if (IsNewLevel(scene))
         {
-            numberOfDeath = 0;
-            HPLost = 0;
             timer = 0f;
-            numberOfKills = 0;
-            
+            checkpointTime = 0f;
         }
     }
 
@@ -100,6 +91,12 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public float SetCheckpointTime()
+    {
+        checkpointTime = timer; // Set checkpointTime to the current timer value
+        return checkpointTime;
     }
 
 }
