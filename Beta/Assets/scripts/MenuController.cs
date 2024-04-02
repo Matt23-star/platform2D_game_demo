@@ -9,7 +9,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         currentScene = SceneManager.GetActiveScene().name;
-        print("current scene name:" + currentScene);
+        //print("current scene name:" + currentScene);
     }
 
     public void LoadLevel(string levelName)

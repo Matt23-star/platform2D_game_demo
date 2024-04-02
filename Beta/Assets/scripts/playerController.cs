@@ -37,6 +37,9 @@ public class playerController : MonoBehaviour
     public LayerMask block;
     private float bulletSpeed = 10f;
 
+    //Analytics variables
+    
+
     void Start()
     {
         //CheckPointManager.Instance.SetCheckpoint(transform, GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>());
@@ -311,8 +314,15 @@ public class playerController : MonoBehaviour
 
                 {
                     // Logic to eliminate the enemy
-                    GameManager.Instance.numberOfKills++;
-                    Destroy(collision.gameObject);  // Example of eliminating the enemy
+                    string EnemyName = collision.gameObject.name;
+                    if (GameObject.Find(EnemyName) != null)
+                    {
+                        Analytics.Instance.CollectDataEnemyName(EnemyName);
+                        Analytics.Instance.Send("EnemykillingRate");
+                        Destroy(collision.gameObject);  // Example of eliminating the enemy
+                    }
+                    
+                    
 
                     // Optionally, add a bounce effect to the player
                     rb.velocity = new Vector2(rb.velocity.x, 10); // Adjust the Y velocity to give a bounce effect
@@ -335,10 +345,21 @@ public class playerController : MonoBehaviour
 
     void CheckDeath()
     {
+        
         if (transform.position.y <= deathY)
         {
-            //keep track of number of death for analytics
-            GameManager.Instance.numberOfDeath++;
+            //Debug.Log($"Player Y Position: {transform.position.y}, DeathY: {deathY}");
+            // Record and send the deathLocation
+            if (Analytics.Instance != null)
+            {
+                //Debug.Log($"Analytics Instance: {Analytics.Instance}");
+                Analytics.Instance.CollectDataDeathLoc(transform.position);
+            }
+            else
+            {
+                Debug.Log("Analytics instance is null.");
+            }
+            Analytics.Instance.Send("LocationOfDeath");
             //GameManager.Instance.RestartLevel();
             CheckPointManager.Instance.RespawnPlayer(this.gameObject);
         }
@@ -348,7 +369,6 @@ public class playerController : MonoBehaviour
     {
         isHurt = true;
         hp -= 1;
-        GameManager.Instance.HPLost--;
         UpdateHpText();
 
         Vector2 knockbackDirection = transform.position.x < collision.gameObject.transform.position.x ? Vector2.left : Vector2.right;
@@ -356,10 +376,13 @@ public class playerController : MonoBehaviour
 
         if (hp <= 0)
         {
-            //keep track of number of death for analytics
-            GameManager.Instance.numberOfDeath++;
+            // Record and send the deathLocation
+            Analytics.Instance.CollectDataDeathLoc(transform.position);
+            Analytics.Instance.Send("LocationOfDeath");
             //GameManager.Instance.RestartLevel();
             CheckPointManager.Instance.RespawnPlayer(gameObject);
+            hp = 3;
+            UpdateHpText();
         }
         else
         {
