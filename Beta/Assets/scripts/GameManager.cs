@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float timer;
     [HideInInspector] public string currentLevelName;
     [HideInInspector] public int numberOfKills;
+    
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         timer = 0f;
         // Initialize kills
         numberOfKills = 0;
+        
     }
 
     private void Update()
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
             HPLost = 0;
             timer = 0f;
             numberOfKills = 0;
+            
         }
     }
 

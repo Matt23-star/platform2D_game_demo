@@ -13,7 +13,7 @@ public class CheckPointManager : MonoBehaviour
     private void Awake()
     {
         // Singleton pattern to ensure only one instance exists.
-        Debug.Log(Instance == null ? "Instance is null" : "Instance is not null");
+        //Debug.Log(Instance == null ? "Instance is null" : "Instance is not null");
 
         if (Instance == null)
         {

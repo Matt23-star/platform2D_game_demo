@@ -6,45 +6,58 @@ using UnityEngine.SceneManagement;
 
 public class Analytics : MonoBehaviour
 {
-    
+    private string CurrentScene;
     public static Analytics Instance { get; private set; }
     // Death Analytics declare
     
-    [HideInInspector] public int numberOfDeathLv0;
-    [HideInInspector] public int numberOfDeathLv1;
-    [HideInInspector] public int numberOfDeathLv2;
-    private string level1Death = "entry.366340186";
-    private string level2Death = "entry.1882149854";
-    private string level3Death = "entry.2135360581";
+    private string EKRLv2Ans;
+    private string EKRLv3Ans;
+    private string EKRLv2Entry = "entry.949278824";
+    private string EKRLv3Entry = "entry.1014081727";
+    
 
-    // the number of HP lost
-    [HideInInspector] public int HPRemainLv0;
-    [HideInInspector] public int HPRemainLv1;
-    [HideInInspector] public int HPRemainLv2;
-    private string level1HP = "entry.636490887";
-    private string level2HP = "entry.431031045";
-    private string level3HP = "entry.384606130";
+    // check point pass rate
+    [HideInInspector] public int CPPRLv1Ans;
+    [HideInInspector] public int CPPRLv2Ans1;
+    [HideInInspector] public int CPPRLv2Ans2;
+    [HideInInspector] public int CPPRLv3Ans1;
+    [HideInInspector] public int CPPRLv3Ans2;
+    [HideInInspector] public int CPPRLv4Ans;
+    private string CPPRLv1Entry = "entry.1962806257";
+    private string CPPRLv2Entry1 = "entry.373101319";
+    private string CPPRLv2Entry2 = "entry.1818093458";
+    private string CPPRLv3Entry1 = "entry.1119046907";
+    private string CPPRLv3Entry2 = "entry.1211544911";
+    private string CPPRLv4Entry = "entry.836668042";
 
     // time to beat each level
-    [HideInInspector] public float timeLv0;
     [HideInInspector] public float timeLv1;
-    [HideInInspector] public float timeLv2;
-    private string level1Time = "entry.1788654737";
-    private string level2Time = "entry.1743989579";
-    private string level3Time = "entry.1318131020";
+    [HideInInspector] public float time1Lv2;
+    [HideInInspector] public float time2Lv2;
+    [HideInInspector] public float time1Lv3;
+    [HideInInspector] public float time2Lv3;
+    [HideInInspector] public float timeLv4;
+    private string level1Time = "entry.646782995";
+    private string level2Time1 = "entry.991249842";
+    private string level2Time2 = "entry.218118490";
+    private string level3Time1 = "entry.1496015641";
+    private string level3Time2 = "entry.214704749";
+    private string level4Time = "entry.1592600164";
 
     // number of enemy kills
-    [HideInInspector] public int killsLv0;
-    [HideInInspector] public int killsLv1;
-    [HideInInspector] public int killsLv2;
-    private string level1Kills = "entry.440537020";
-    private string level2Kills = "entry.649278256";
-    private string level3Kills = "entry.1912742675";
+    [HideInInspector] public Vector2 DeathLocLv1;
+    [HideInInspector] public Vector2 DeathLocLv2;
+    [HideInInspector] public Vector2 DeathLocLv3;
+    [HideInInspector] public Vector2 DeathLocLv4;
+    private string level1DL = "entry.1104684653";
+    private string level2DL = "entry.1332899930";
+    private string level3DL = "entry.42495865";
+    private string level4DL = "entry.1427656629";
 
 
     void Awake()
     {
-        Debug.Log("Analytics Awake called");
+        //Debug.Log("Analytics Awake called");
         if (Instance == null)
         {
             Instance = this;
@@ -58,80 +71,103 @@ public class Analytics : MonoBehaviour
         
     }
 
-    public void Send()
+    void Start()
     {
-        StartCoroutine(DeathCountPost());
-        StartCoroutine(HPLostPost());
-        StartCoroutine(TimeTakenPost());
-        StartCoroutine(EnemyKillPost());
+        CurrentScene = SceneManager.GetActiveScene().name;
+    }
+
+    public void Send(string s)
+    {
+
+        if (s.Equals("EnemykillingRate")) { StartCoroutine(EnemykillingRate()); }
+        if (s.Equals("CheckPointPassRate")) { StartCoroutine(CheckPointPassRate()); }
+        if (s.Equals("CToCTime")) { StartCoroutine(CToCTime()); }
+        if (s.Equals("LocationOfDeath")) { StartCoroutine(LocationOfDeath()); }
     }
     //Death analytics
-    IEnumerator DeathCountPost()
+    IEnumerator EnemykillingRate()
     {
-        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSeMOVbuwS7jL4UVSTNgvSCYh1fuFIj6KttcarSuFoFlaFVspg/formResponse";
+        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSc3UW934jfnkVFyYoFKqwbAJ0U8d4Q2EVg-e5WUDymdTaH3bw/formResponse";
         WWWForm form = new WWWForm();
 
-       
-        form.AddField(level1Death, numberOfDeathLv0);
-        //Debug.Log("add filed level 00: " + numberOfDeathLv0);
-        form.AddField(level2Death, numberOfDeathLv1);
-        //Debug.Log("add filed level 01: " + numberOfDeathLv1);
-        form.AddField(level3Death, numberOfDeathLv2);
-        //Debug.Log("add filed level 02: " + numberOfDeathLv0);
-              
+        switch (CurrentScene)
+        {
+            case "level 01":
+                form.AddField(EKRLv2Entry, EKRLv2Ans);
+                //Debug.Log("add filed level 01: " + EKRLv2Ans);
+                break;
+            case "level 02":
+                form.AddField(EKRLv3Entry, EKRLv3Ans);
+                //Debug.Log("add filed level 02: " + EKRLv3Ans);
+                break;
+        }
+
+
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
-        Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
+        //Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Error_DeathCount: " + www.error);
+            Debug.LogError("Error_EnemykillingRate: " + www.error);
         }
         else
         {
-            Debug.Log("DeathCount form upload complete!");
+            Debug.Log("EnemykillingRate form upload complete!");
         }
     }
 
-    IEnumerator HPLostPost()
+    IEnumerator CheckPointPassRate()
     {
-        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSdCUHqznxeiZD_xkhBbUHr91ewkYHY5ac8PoqspBYsPjZjMAw/formResponse";
+        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScuDAbw4EtLU0jmL2cn434BSpVEnS2zJ9qJ4O2SJD-8Vl_tYQ/formResponse";
         WWWForm form = new WWWForm();
         
             
-        form.AddField(level1HP, HPRemainLv0);
+        form.AddField(CPPRLv1Entry, CPPRLv1Entry);
                
-        form.AddField(level2HP, HPRemainLv1);
+        form.AddField(CPPRLv2Entry1, CPPRLv2Ans1);
                 
-        form.AddField(level3HP, HPRemainLv2);
-                
-        
+        form.AddField(CPPRLv2Entry2, CPPRLv2Ans2);
+
+        form.AddField(CPPRLv3Entry1, CPPRLv3Entry1);
+
+        form.AddField(CPPRLv3Entry2, CPPRLv3Entry2);
+
+        form.AddField(CPPRLv4Entry, CPPRLv4Entry);
+
+
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Error_HPLost: " + www.error);
+            Debug.LogError("Error_CheckPointPassRate: " + www.error);
         }
         else
         {
-            Debug.Log("HPLost form upload complete!");
+            Debug.Log("CheckPointPassRate form upload complete!");
         }
     }
 
-    //  Average time it takes to beat each level
-    IEnumerator TimeTakenPost()
+    //  Record the time it takes between two checkpoints
+    IEnumerator CToCTime()
     {
-        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSclflhBXU_eAxt7Bt4h0YjIPfsRmB8H-QINzgtHTcf96qcZOQ/formResponse";
+        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSdLXgnazr4zswDYlAIafn68uRogcjaqautxODUFKrlxjUgFmA/formResponse";
         WWWForm form = new WWWForm();
         
             
-        form.AddField(level1Time, timeLv0.ToString());
+        form.AddField(level1Time, timeLv1.ToString());
             
-        form.AddField(level2Time, timeLv1.ToString());
+        form.AddField(level2Time1, time1Lv2.ToString());
                 
-        form.AddField(level3Time, timeLv2.ToString());
+        form.AddField(level2Time2, time2Lv2.ToString());
+
+        form.AddField(level3Time1, time1Lv3.ToString());
+
+        form.AddField(level3Time2, time2Lv3.ToString());
+
+        form.AddField(level4Time, timeLv4.ToString());
                 
         
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
@@ -140,25 +176,37 @@ public class Analytics : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Error_TimeTaken: " + www.error);
+            Debug.LogError("Error_CToCTime: " + www.error);
         }
         else
         {
-            Debug.Log("TimeTaken form upload complete!");
+            Debug.Log("CToCTime form upload complete!");
         }
     }
 
-    // Enemy kills of each level
-    IEnumerator EnemyKillPost()
+    // Location of Death
+    IEnumerator LocationOfDeath()
     {
-        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSf8TemkiAOiiiTUzsMa-J0LepZgPKdKHl1IB7gwsTOT-4CVaA/formResponse";
+        string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScEbBZoqKhe0AU9aExqvH3hDHuOyfDd42FxqWNsSUooPdFfSQ/formResponse";
         WWWForm form = new WWWForm();
+        switch (CurrentScene)
+        {
+            case "level 00":
+                form.AddField(level1DL, DeathLocLv1.ToString());
+                break;
 
-        form.AddField(level1Kills, killsLv0);
+            case "level 01":
+                form.AddField(level2DL, DeathLocLv2.ToString());
+                break;
 
-        form.AddField(level2Kills, killsLv1);
+            case "level 02":
+                form.AddField(level3DL, DeathLocLv3.ToString());
+                break;
 
-        form.AddField(level3Kills, killsLv2);
+            case "level 03":
+                form.AddField(level4DL, DeathLocLv4.ToString());
+                break;
+        }
 
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
@@ -166,11 +214,57 @@ public class Analytics : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Error_EnemyKill: " + www.error);
+            Debug.LogError("Error_LocationOfDeath: " + www.error);
         }
         else
         {
-            Debug.Log("EnemyKill form upload complete!");
+            Debug.Log("LocationOfDeath form upload complete!");
         }
+    }
+
+    public void CollectDataDeathLoc(Vector2 DeathLoc)
+    {
+        Debug.Log("CollectDataDeathLoc started.");
+        switch (CurrentScene)
+        {
+            case "level 00":
+                DeathLocLv1 = DeathLoc;
+                Debug.Log("DeathLocLv1 recorded!");
+                break;
+
+            case "level 01":
+                DeathLocLv2 = DeathLoc;
+                Debug.Log("DeathLocLv2 recorded!");
+                break;
+
+            case "level 02":
+                DeathLocLv3 = DeathLoc;
+                Debug.Log("DeathLocLv3 recorded!");
+                break;
+
+            case "level 03":
+                DeathLocLv4 = DeathLoc;
+                Debug.Log("DeathLocLv4 recorded!");
+                break;
+        }
+        Debug.Log("CollectDataDeathLoc completed.");
+    }
+
+    public void CollectDataEnemyName(string Name)
+    {
+        Debug.Log("CollectDataEnemyName started.");
+        switch (CurrentScene)
+        {
+            case "level 01":
+                EKRLv2Ans = Name;
+                Debug.Log($"EKRLv2Ans: {EKRLv2Ans}  recorded!");
+                break;
+
+            case "level 02":
+                EKRLv3Ans = Name;
+                Debug.Log($"EKRLv3Ans: {EKRLv3Ans} recorded!");
+                break;
+        }
+        Debug.Log("CollectDataEnemyName completed.");
     }
 }
