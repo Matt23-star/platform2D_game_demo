@@ -21,6 +21,7 @@ public class EndOfGame : MonoBehaviour
                 Debug.Log("Endpoint reached");
                 Analytics.Instance.Send("CheckPointPassRateEndpoint");
             }
+            GameManager.ComingFromLastLevel = true;
             GameManager.Instance.LoadScene("menu");
         }
     }

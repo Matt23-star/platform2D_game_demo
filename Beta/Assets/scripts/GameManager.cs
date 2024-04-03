@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float timer;
     [HideInInspector] public float checkpointTime;
     [HideInInspector] public string currentLevelName;
+    [HideInInspector] public static bool ComingFromLastLevel { get; set; } = false;
     
 
     private void Awake()
