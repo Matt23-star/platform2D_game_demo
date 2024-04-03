@@ -613,6 +613,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &479275585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8498118431206097827, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+  m_PrefabInstance: {fileID: 839630698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &585453014 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 3413507911636606295, guid: aeb2cf5869841fa4b9379fa531bc59ee, type: 3}
@@ -4716,11 +4721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47458b0a8e1b8c943b459d3d28afc554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfDeath: 0
-  HPLost: 0
   timer: 0
+  checkpointTime: 0
   currentLevelName: 
-  numberOfKills: 0
 --- !u!4 &827605302
 Transform:
   m_ObjectHideFlags: 0
@@ -4964,6 +4967,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: reachText
+      value: 
+      objectReference: {fileID: 479275585}
+    - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 211848030}
@@ -5164,18 +5171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33927245ba74134ebc1040c2c5a4e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfDeathLv0: 0
-  numberOfDeathLv1: 0
-  numberOfDeathLv2: 0
-  HPRemainLv0: 0
-  HPRemainLv1: 0
-  HPRemainLv2: 0
-  timeLv0: 0
-  timeLv1: 0
-  timeLv2: 0
-  killsLv0: 0
-  killsLv1: 0
-  killsLv2: 0
+  CPPRLv1Ans: 0
+  CPPRLv2Ans1: 0
+  CPPRLv2Ans2: 0
+  CPPRLv3Ans1: 0
+  CPPRLv3Ans2: 0
+  CPPRLv4Ans: 0
 --- !u!4 &1595502943
 Transform:
   m_ObjectHideFlags: 0
