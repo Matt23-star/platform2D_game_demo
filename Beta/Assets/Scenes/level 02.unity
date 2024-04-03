@@ -278,6 +278,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
+      propertyPath: reachText
+      value: 
+      objectReference: {fileID: 1428824944}
+    - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: checkpointText
       value: 
       objectReference: {fileID: 1451950011}
@@ -3032,6 +3036,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 114932679}
     - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: reachText
+      value: 
+      objectReference: {fileID: 1971211550}
+    - target: {fileID: 6028543713957937363, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: block.m_Bits
       value: 256
       objectReference: {fileID: 0}
@@ -3324,16 +3332,6 @@ MonoBehaviour:
   CPPRLv3Ans1: 0
   CPPRLv3Ans2: 0
   CPPRLv4Ans: 0
-  timeLv1: 0
-  time1Lv2: 0
-  time2Lv2: 0
-  time1Lv3: 0
-  time2Lv3: 0
-  timeLv4: 0
-  DeathLocLv1: {x: 0, y: 0}
-  DeathLocLv2: {x: 0, y: 0}
-  DeathLocLv3: {x: 0, y: 0}
-  DeathLocLv4: {x: 0, y: 0}
 --- !u!4 &1316295008
 Transform:
   m_ObjectHideFlags: 0
@@ -3506,6 +3504,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2734362180269218419, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_Name
+      value: ReachedMessage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734362180269218419, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238750717817427417, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3575,12 +3581,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+--- !u!1 &1428824944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2734362180269218419, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+  m_PrefabInstance: {fileID: 1428824943}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1451950011 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2405747211516870309, guid: dd10171094bb808419b12e0d472617a7, type: 3}
   m_PrefabInstance: {fileID: 1428824943}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1428824944}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -3615,11 +3626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47458b0a8e1b8c943b459d3d28afc554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfDeath: 0
-  HPLost: 0
   timer: 0
+  checkpointTime: 0
   currentLevelName: 
-  numberOfKills: 0
 --- !u!4 &1465322461
 Transform:
   m_ObjectHideFlags: 0
@@ -6301,6 +6310,11 @@ Transform:
   - {fileID: 258544202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1971211550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8498118431206097827, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+  m_PrefabInstance: {fileID: 1428824943}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2024593746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 406815647604111021, guid: dd10171094bb808419b12e0d472617a7, type: 3}

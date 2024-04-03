@@ -1105,12 +1105,12 @@ GameObject:
   - component: {fileID: 5307222641181452186}
   - component: {fileID: 2405747211516870309}
   m_Layer: 5
-  m_Name: CheckpointReachedMessage
+  m_Name: CheckPointReachedMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &852486476370079737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1745,12 +1745,12 @@ GameObject:
   - component: {fileID: 4725603620084630718}
   - component: {fileID: 365978739832015932}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ReachedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4780702457556155850
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reach to the Green Endpoint and Use the Yellow Checkpoint
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
