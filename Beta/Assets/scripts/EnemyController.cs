@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private float leftx, rightx;
     public float speed = 2f;
     private bool movingRight = true;
+    //private bool isColliding = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,4 +47,35 @@ public class EnemyController : MonoBehaviour
             movingRight = true;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Collider2D otherCollider = collision.collider;
+            if (otherCollider is CapsuleCollider2D)
+            {
+                if (collision.contacts[0].normal.y < 0)
+                {
+                    print(collision.contacts[0].normal.y);
+                    if (collision.gameObject.GetComponent<SpriteRenderer>().color != this.gameObject.GetComponent<SpriteRenderer>().color)
+                    {
+                        if (this.gameObject != null)
+                        {
+                            Analytics.Instance.CollectDataEnemyName(this.gameObject.name);
+                            Analytics.Instance.Send("EnemykillingRate");
+                            Destroy(this.gameObject);
+                        }
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    isColliding = false;
+    //}
 }
