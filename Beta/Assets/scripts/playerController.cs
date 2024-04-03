@@ -329,11 +329,11 @@ public class playerController : MonoBehaviour
         {
             if (isWhite)
             {
-                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.white;
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
             }
             else
             {
-                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.white;
             }
 
             Vector3 position = transform.position + transform.right; // Generate bullet position relative to transform's position
@@ -343,7 +343,8 @@ public class playerController : MonoBehaviour
             bulletRb.velocity = transform.right * bulletSpeed;
 
             // Destroy the bullet after 5 seconds
-            Destroy(bullet, 5f);
+
+            Destroy(bullet, 1f);
         }
     }
 

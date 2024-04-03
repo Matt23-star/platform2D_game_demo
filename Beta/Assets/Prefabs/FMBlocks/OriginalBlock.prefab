@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1807189240802235023}
   - component: {fileID: 6459435375600871663}
   - component: {fileID: 2201817466176515237}
-  - component: {fileID: 2799170878182718577}
+  - component: {fileID: 6562121470687226373}
   m_Layer: 8
   m_Name: OriginalBlock
   m_TagString: Block
@@ -244,7 +244,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &2799170878182718577
+--- !u!114 &6562121470687226373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
