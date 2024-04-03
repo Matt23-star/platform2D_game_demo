@@ -9,26 +9,32 @@ public class EndPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            string currentLevelName = SceneManager.GetActiveScene().name;
-            
-            if (currentLevelName.Equals("level 00"))
+            Collider2D otherCollider = collision;
+            if (otherCollider is BoxCollider2D)
             {
-                // Accessing the timer from GameManager and logging the time
-                float elapsedTime = GameManager.Instance.timer;
-                Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
-                Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
-                Analytics.Instance.Send("CToCTimeEndpoint");
-            }else if(currentLevelName.Equals("level 01") || currentLevelName.Equals("level 02"))
-            {
-                // Calculate time from last checkpoint to endpoint
-                float elapsedTimeFromCheckpoint = GameManager.Instance.timer - GameManager.Instance.checkpointTime;
-                Analytics.Instance.CollectDataCToCTime(elapsedTimeFromCheckpoint, "Endpoint");
-                Debug.Log($"Time to reach endpoint: {elapsedTimeFromCheckpoint} seconds");
-                Analytics.Instance.Send("CToCTimeEndpoint");
+                string currentLevelName = SceneManager.GetActiveScene().name;
+
+                if (currentLevelName.Equals("level 00"))
+                {
+                    // Accessing the timer from GameManager and logging the time
+                    float elapsedTime = GameManager.Instance.timer;
+                    Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
+                    Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
+                    Analytics.Instance.Send("CToCTimeEndpoint");
+                }
+                else if (currentLevelName.Equals("level 01") || currentLevelName.Equals("level 02"))
+                {
+                    // Calculate time from last checkpoint to endpoint
+                    float elapsedTimeFromCheckpoint = GameManager.Instance.timer - GameManager.Instance.checkpointTime;
+                    Analytics.Instance.CollectDataCToCTime(elapsedTimeFromCheckpoint, "Endpoint");
+                    Debug.Log($"Time to reach endpoint: {elapsedTimeFromCheckpoint} seconds");
+                    Analytics.Instance.Send("CToCTimeEndpoint");
+                }
+                GameManager.Instance.NextLevel();
+
             }
-            GameManager.Instance.NextLevel();
         }
     }
 
