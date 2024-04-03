@@ -9,12 +9,16 @@ public class EndOfGame : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            string currentLevelName = SceneManager.GetActiveScene().name;
-            float elapsedTime = GameManager.Instance.timer;
-            Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
-            Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
-            Analytics.Instance.Send("CToCTimeEndpoint");
-            GameManager.Instance.LoadScene("menu");
+            Collider2D otherCollider = collision;
+            if (otherCollider is BoxCollider2D)
+            {
+                string currentLevelName = SceneManager.GetActiveScene().name;
+                float elapsedTime = GameManager.Instance.timer;
+                Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
+                Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
+                Analytics.Instance.Send("CToCTimeEndpoint");
+                GameManager.Instance.LoadScene("menu");
+            }
         }
     }
 
