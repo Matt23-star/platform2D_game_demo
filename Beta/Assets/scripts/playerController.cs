@@ -27,6 +27,7 @@ public class playerController : MonoBehaviour
     private float isHurtTime = 0.5f;
     private bool isWhite = true;
     public GameObject bulletPrefab;
+    public GameObject reachText;
     private bool isDie = false;
 
 
@@ -49,7 +50,12 @@ public class playerController : MonoBehaviour
         Color playerColor = GetComponent<SpriteRenderer>().color;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
         if(GameObject.Find("CheckPointManager"))CheckPointManager.Instance.SetStartpoint(transform.position/*, playerColor*/);
-
+        reachText.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex < 4)
+        {
+            StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint", 3f));
+        }
+        else { StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint\r\nTry to use <J> to color the blocks", 3f));}
     }
 
     // Update is called once per frame
@@ -75,71 +81,6 @@ public class playerController : MonoBehaviour
     void Move()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
-        // Check for grounded separately, using a downward raycast or an OverlapCircle at the player's feet position.
-        //bool isGrounded = IsGrounded(white_ground | black_ground | gray_ground); // Assuming IsGrounded() is defined elsewhere in your code.
-
-        //LayerMask combinedLayer = new LayerMask();
-        //if (isWhite)
-        //{
-        //    combinedLayer |= black_ground;
-        //}
-        //else
-        //{
-        //    combinedLayer |= white_ground;
-        //}
-
-        //// Only set ray length based on buffer
-        //float rayLength = wallCheckDistance + 0.1f; // Slight buffer to account for movement
-
-        //// Offset for starting the raycasts just inside the player's collider edge
-        //float colliderEdgeOffset = GetComponent<CapsuleCollider2D>().size.x / 2 * transform.localScale.x;
-
-        //// Cast rays only if there's horizontal input and the player is not grounded
-        //if (!Mathf.Approximately(horizontalMove, 0) && !isGrounded)
-        //{
-        //    Vector2 direction = horizontalMove > 0 ? Vector2.right : Vector2.left;
-        //    Vector2 positionOffset = new Vector2(colliderEdgeOffset * (horizontalMove > 0 ? 1 : -1), 0);
-        //    Vector2 rayOriginTop = new Vector2(transform.position.x, transform.position.y + GetComponent<CapsuleCollider2D>().size.y / 2) + positionOffset;
-        //    Vector2 rayOriginBottom = new Vector2(transform.position.x, transform.position.y - GetComponent<CapsuleCollider2D>().size.y / 2) + positionOffset;
-
-        //    RaycastHit2D hitTop = Physics2D.Raycast(rayOriginTop, direction, rayLength, combinedLayer);
-        //    RaycastHit2D hitBottom = Physics2D.Raycast(rayOriginBottom, direction, rayLength, combinedLayer);
-
-        //    // Check if any of the rays hit a wall
-        //    if (hitTop.collider != null || hitBottom.collider != null)
-        //    {
-        //        // There's a wall, so don't move horizontally
-        //        horizontalMove = 0;
-        //    }
-        //}
-
-        //// Apply horizontal movement only if the player is grounded or there is horizontal input
-        //if (isGrounded || !Mathf.Approximately(horizontalMove, 0))
-        //{
-        //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
-        //}
-
-        // Check for a wall on the right
-        //if (horizontalMove > 0 && Physics2D.Raycast(transform.position, Vector2.right, wallCheckDistance, combinedLayer))
-        //{
-        //    // There's a wall to the right, so don't move right
-        //    horizontalMove = 0;
-        //}
-
-        //// Check for a wall on the left
-        //if (horizontalMove < 0 && Physics2D.Raycast(transform.position, Vector2.left, wallCheckDistance, combinedLayer))
-        //{
-        //    // There's a wall to the left, so don't move left
-        //    horizontalMove = 0;
-        //}
-
-        //// Apply movement
-        //rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
-        //if (horizontalMove != 0)
-        //{
-        //    //rb.velocity = new Vector2 (horizontalMove * speed * Time.deltaTime, rb.velocity.y);
-        //    rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
-        //}
 
         if (horizontalMove!=0)
         {
@@ -168,26 +109,6 @@ public class playerController : MonoBehaviour
             }
         }
     }
-
-    //bool IsWallAhead(Vector2 direction)
-    //{
-    //    // Perform a raycast in the direction of movement
-    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, gray_ground);
-    //    if (hit.collider == null)
-    //    {
-    //        if(CheckOverlap(white_ground))
-    //            hit = Physics2D.Raycast(transform.position, direction, 1f, black_ground);
-    //    }
-
-    //    if (hit.collider == null)
-    //    {
-    //        if (CheckOverlap(black_ground))
-    //            hit = Physics2D.Raycast(transform.position, direction, 1f, white_ground);
-    //    }
-
-    //    // If the raycast hits a wall, return true
-    //    return hit.collider != null;
-    //}
 
     bool IsGrounded(LayerMask groundLayer)
     {
@@ -266,23 +187,6 @@ public class playerController : MonoBehaviour
         }
     }
 
-
-    //bool CheckOverlap(LayerMask ground)
-    //{
-
-
-    //    CapsuleCollider2D capsuleCollider = GetComponent<CapsuleCollider2D>();
-    //    if (capsuleCollider == null) return false;
-
-    //    CapsuleDirection2D direction = capsuleCollider.direction;
-
-    //    float angle = transform.eulerAngles.z;
-    //    //find bug. the position lower than observed postion
-    //    Collider2D overlapCollider = Physics2D.OverlapCapsule(capsuleCollider.bounds.center, capsuleCollider.size, direction, angle, ground);
-    //    if (overlapCollider == null) return false;
-    //    return true;
-    //}
-
     bool CheckOverlap(LayerMask ground)
     {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
@@ -309,29 +213,33 @@ public class playerController : MonoBehaviour
 
 
             // Check if the collision is on top of the enemy
-            if (collision.contacts[0].normal.y > 0.5)
+            if (collision.contacts[0].normal.y > 0.5 && collision.contacts[0].normal.y <1)
             {
+                print("From player : "+ collision.contacts[0].normal.y);
                 if ((isWhite && enemyColor.Equals(Color.black)) || (!isWhite && enemyColor.Equals(Color.white)))
-
                 {
                     // Logic to eliminate the enemy
-                    string EnemyName = collision.gameObject.name;
-                    if (GameObject.Find(EnemyName) != null)
-                    {
-                        Analytics.Instance.CollectDataEnemyName(EnemyName);
-                        Analytics.Instance.Send("EnemykillingRate");
-                        Destroy(collision.gameObject);  // Example of eliminating the enemy
-                    }
-                    
-                    
+                    //string EnemyName = collision.gameObject.name;
+                    //if (GameObject.Find(EnemyName) != null)
+                    //{
+                    //    Analytics.Instance.CollectDataEnemyName(EnemyName);
+                    //    Analytics.Instance.Send("EnemykillingRate");
+                    //    Destroy(collision.gameObject);  // Example of eliminating the enemy
+                    //}
 
                     // Optionally, add a bounce effect to the player
                     rb.velocity = new Vector2(rb.velocity.x, 10); // Adjust the Y velocity to give a bounce effect
                 }
                 else
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, 10);
+                    //print("Player is hurt on the top");
                     ApplyDamage(collision);
                 }
+            }
+            else if(collision.contacts[0].normal.y == 1)
+            {
+                
             }
             else
             {
@@ -342,7 +250,6 @@ public class playerController : MonoBehaviour
 
 
     }
-
 
     void CheckDeath()
     {
@@ -358,6 +265,9 @@ public class playerController : MonoBehaviour
                 Analytics.Instance.Send("LocationOfDeath");
             }
             //GameManager.Instance.RestartLevel();
+            hp = 3;
+            UpdateHpText();
+            StartCoroutine(ResetIsHurt());
             RespawnPlayer();
         }
     }
@@ -374,16 +284,17 @@ public class playerController : MonoBehaviour
         if (hp <= 0)
         {
             // Record and send the deathLocation
-            //if(!isDie)
-            //{
-            //    isDie = true;
-            //    Analytics.Instance.CollectDataDeathLoc(transform.position);
-            //    Analytics.Instance.Send("LocationOfDeath");
-            //}
+            if (!isDie)
+            {
+                isDie = true;
+                Analytics.Instance.CollectDataDeathLoc(transform.position);
+                Analytics.Instance.Send("LocationOfDeath");
+            }
             //GameManager.Instance.RestartLevel();
-            RespawnPlayer();
             hp = 3;
             UpdateHpText();
+            StartCoroutine(ResetIsHurt());
+            RespawnPlayer();
         }
         else
         {
@@ -436,5 +347,26 @@ public class playerController : MonoBehaviour
         }
     }
 
+    IEnumerator ShowAndFadeMessage(string text, float duration)
+    {
+        TextMeshProUGUI reachedText = reachText.GetComponent<TextMeshProUGUI>();
+        reachedText.text = text; // Set the text
+        reachedText.alpha = 1; // Make sure the text is fully visible
+        reachedText.fontSize = 15; // Set the font size
+        // Wait for a brief moment before starting the fade
+        yield return new WaitForSeconds(0.5f);
+         // Duration over which to fade out
+        float startAlpha = reachedText.alpha;
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            float normalizedTime = t / duration;
+            reachedText.alpha = Mathf.Lerp(startAlpha, 0, normalizedTime); // Linearly interpolate alpha value over time
+            yield return null;
+        }
+
+        reachedText.alpha = 0;// Ensure the text is fully transparent at the end
+        reachText.SetActive(false);
+    }
 
 }
