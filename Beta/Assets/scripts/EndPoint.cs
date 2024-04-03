@@ -23,6 +23,9 @@ public class EndPoint : MonoBehaviour
                     Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
                     Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
                     Analytics.Instance.Send("CToCTimeEndpoint");
+                    Analytics.Instance.ColloctDataCPPR("Endpoint");
+                    Debug.Log("Endpoint reached");
+                    Analytics.Instance.Send("CheckPointPassRateEndpoint");
                 }
                 else if (currentLevelName.Equals("level 01") || currentLevelName.Equals("level 02"))
                 {
@@ -31,10 +34,14 @@ public class EndPoint : MonoBehaviour
                     Analytics.Instance.CollectDataCToCTime(elapsedTimeFromCheckpoint, "Endpoint");
                     Debug.Log($"Time to reach endpoint: {elapsedTimeFromCheckpoint} seconds");
                     Analytics.Instance.Send("CToCTimeEndpoint");
+                    Analytics.Instance.ColloctDataCPPR("Endpoint");
+                    Debug.Log("Endpoint reached");
+                    Analytics.Instance.Send("CheckPointPassRateEndpoint");
                 }
-                GameManager.Instance.NextLevel();
+                
 
             }
+            GameManager.Instance.NextLevel();
         }
     }
 

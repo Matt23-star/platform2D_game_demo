@@ -581,9 +581,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Use <W+D> <--> to move
+  m_text: 'Use <A+D> <--> to move
 
-    <Space> to jump
+    <Space/W> to jump
 
     <K> to switch color,
     <J> to shot bullet

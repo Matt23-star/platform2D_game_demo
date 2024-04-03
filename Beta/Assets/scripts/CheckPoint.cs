@@ -26,6 +26,9 @@ public class CheckPoint : MonoBehaviour
                     Analytics.Instance.CollectDataCToCTime(elapsedTime, "Checkpoint");
                     Debug.Log($"Time to reach checkpoint: {elapsedTime} seconds");
                     Analytics.Instance.Send("CToCTimeCheckpoint");
+                    Analytics.Instance.ColloctDataCPPR("Checkpoint");
+                    Debug.Log("Checkpoint reached");
+                    Analytics.Instance.Send("CheckPointPassRateCheckpoint");
                 }
             }
         }

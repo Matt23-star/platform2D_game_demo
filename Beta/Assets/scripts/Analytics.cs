@@ -74,7 +74,8 @@ public class Analytics : MonoBehaviour
     {
 
         if (s.Equals("EnemykillingRate")) { StartCoroutine(EnemykillingRate()); }
-        if (s.Equals("CheckPointPassRate")) { StartCoroutine(CheckPointPassRate()); }
+        if (s.Equals("CheckPointPassRateCheckpoint")) { StartCoroutine(CheckPointPassRate("Checkpoint")); }
+        if (s.Equals("CheckPointPassRateEndpoint")) { StartCoroutine(CheckPointPassRate("Endpoint")); }
         if (s.Equals("CToCTimeCheckpoint")) { StartCoroutine(CToCTime("Checkpoint")); }
         if (s.Equals("CToCTimeEndpoint")) { StartCoroutine(CToCTime("Endpoint")); }
         if (s.Equals("LocationOfDeath")) { StartCoroutine(LocationOfDeath()); }
@@ -112,24 +113,35 @@ public class Analytics : MonoBehaviour
         }
     }
 
-    IEnumerator CheckPointPassRate()
+    IEnumerator CheckPointPassRate(string checkpointOrEndpoint)
     {
         string URL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScuDAbw4EtLU0jmL2cn434BSpVEnS2zJ9qJ4O2SJD-8Vl_tYQ/formResponse";
         WWWForm form = new WWWForm();
+
+        switch (GameManager.Instance.currentLevelName)
+        {
+            case "level 00":
+                form.AddField(CPPRLv1Entry, CPPRLv1Ans);
+                break;
+
+            case "level 01":
+                if (checkpointOrEndpoint.Equals("Checkpoint")) form.AddField(CPPRLv2Entry1, CPPRLv2Ans1);
+                if (checkpointOrEndpoint.Equals("Endpoint")) form.AddField(CPPRLv2Entry2, CPPRLv2Ans2);
+
+                break;
+
+            case "level 02":
+
+                if (checkpointOrEndpoint.Equals("Checkpoint")) form.AddField(CPPRLv3Entry1, CPPRLv3Ans1);
+                if (checkpointOrEndpoint.Equals("Endpoint")) form.AddField(CPPRLv3Entry2, CPPRLv3Ans2);
+
+                break;
+
+            case "level 03":
+                form.AddField(CPPRLv4Entry, CPPRLv4Ans);
+                break;
+        }
         
-            
-        form.AddField(CPPRLv1Entry, CPPRLv1Entry);
-               
-        form.AddField(CPPRLv2Entry1, CPPRLv2Ans1);
-                
-        form.AddField(CPPRLv2Entry2, CPPRLv2Ans2);
-
-        form.AddField(CPPRLv3Entry1, CPPRLv3Entry1);
-
-        form.AddField(CPPRLv3Entry2, CPPRLv3Entry2);
-
-        form.AddField(CPPRLv4Entry, CPPRLv4Entry);
-
 
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         Debug.Log($"Sending POST request to {URL} with {form.data.Length} bytes of data.");
@@ -310,6 +322,48 @@ public class Analytics : MonoBehaviour
                 }
                 break;
 
+        }
+    }
+
+    public void ColloctDataCPPR(string checkpointOrEndpoint)
+    {
+        switch (GameManager.Instance.currentLevelName)
+        {
+            case "level 00":
+                if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    CPPRLv1Ans = 1;
+                }
+                break;
+
+            case "level 01":
+                if (checkpointOrEndpoint.Equals("Checkpoint"))
+                {
+                    CPPRLv2Ans1 = 1;
+                }
+                else if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    CPPRLv2Ans2 = 1;
+                }
+                break;
+
+            case "level 02":
+                if (checkpointOrEndpoint.Equals("Checkpoint"))
+                {
+                    CPPRLv3Ans1 = 1;
+                }
+                else if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    CPPRLv3Ans2 = 1;
+                }
+                break;
+
+            case "level 03":
+                if (checkpointOrEndpoint.Equals("Endpoint"))
+                {
+                    CPPRLv4Ans = 1;
+                }
+                break;
         }
     }
 }

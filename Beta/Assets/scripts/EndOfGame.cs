@@ -17,8 +17,11 @@ public class EndOfGame : MonoBehaviour
                 Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
                 Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
                 Analytics.Instance.Send("CToCTimeEndpoint");
-                GameManager.Instance.LoadScene("menu");
+                Analytics.Instance.ColloctDataCPPR("Endpoint");
+                Debug.Log("Endpoint reached");
+                Analytics.Instance.Send("CheckPointPassRateEndpoint");
             }
+            GameManager.Instance.LoadScene("menu");
         }
     }
 
