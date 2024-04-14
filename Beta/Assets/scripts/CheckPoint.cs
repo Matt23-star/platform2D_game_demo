@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour
 {
     public GameObject reachText;
     private bool isNotReachedBefore = true;
+    public string text_;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,7 +40,7 @@ public class CheckPoint : MonoBehaviour
 
         TextMeshProUGUI checkpointText = reachText.GetComponent<TextMeshProUGUI>();
         if(!isNotReachedBefore) { yield break; }
-        checkpointText.text = "Checkpoint reached!"; // Set the text
+        checkpointText.text = text_; // Set the text
         checkpointText.alpha = 1; // Make sure the text is fully visible
         checkpointText.fontSize = 20; // Set the font size
         // Wait for a brief moment before starting the fade

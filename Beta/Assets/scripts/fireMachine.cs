@@ -12,6 +12,7 @@ public class fireMachine : MonoBehaviour
 
     private float time=0;
     public bool onlyGray = false;
+    //public bool isRandomInterval = false;
     public bool delay;
     public float startDelay;
     private bool delayCompleted = false;
@@ -40,7 +41,7 @@ public class fireMachine : MonoBehaviour
         if (!delayCompleted) return;
         
         time = time + Time.deltaTime;
-        if(time>=timeInterval)
+        if(time>= timeInterval)
         {
             if (onlyGray)
             {

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8624814544135484695}
   - component: {fileID: 1299051435497358763}
   - component: {fileID: 2448868875987222945}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: 2ndChallenge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 39.84, y: 0.65, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
+  m_LocalScale: {x: 3, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7537770201088436532}
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -180,7 +180,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7021693970335698935}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5e1d6297b978c6d44ae81ef429947207, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -228,6 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168f9f732e75694982e29d93239e17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -1.5
+  speed: -3
   range: 29
   knockbackForce: 2
