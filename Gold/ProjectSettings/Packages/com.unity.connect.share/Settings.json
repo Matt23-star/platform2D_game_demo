@@ -1,0 +1,21 @@
+{
+    "m_Dictionary": {
+        "m_DictionaryValues": [
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "buildOutputDirList",
+                "value": "{\"m_Value\":\"C:/UnityProject/BW_Beta;C:/Users/heqij/Desktop/b2;C:/Users/heqij/Desktop/build;C:/Users/Administrator/Desktop/csci-526/s/cs-526-spring-2024-wednesday-project-b-w/Beta/build;C:/UnityProject/BW_Alpha;C:/Users/Administrator/Desktop/csci-526/Prototype/build;D:/work/unity/prototype-webgl-build/CSCI526-prototype;D:/work/unity/prototype-webgl-build;D:/work/unity/Prototype/Build;\"}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "firstTime",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "autoPublish",
+                "value": "{\"m_Value\":true}"
+            }
+        ]
+    }
+}
