@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -1.5
-  range: 16
+  range: 24
   knockbackForce: 2
 --- !u!61 &923031336455645874
 BoxCollider2D:

@@ -69,7 +69,7 @@ public class playerController : MonoBehaviour
         CheckDeath();
         CheckColor();
 
-        if (SceneManager.GetActiveScene().buildIndex >= 4)
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             Shoot();
         }
@@ -329,11 +329,11 @@ public class playerController : MonoBehaviour
         {
             if (isWhite)
             {
-                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.white;
             }
             else
             {
-                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.white;
+                bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
             }
 
             Vector3 position = transform.position + transform.right; // Generate bullet position relative to transform's position
