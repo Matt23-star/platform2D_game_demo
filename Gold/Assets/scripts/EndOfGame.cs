@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndOfGame : MonoBehaviour
 {
+    public GameObject window;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -22,7 +24,8 @@ public class EndOfGame : MonoBehaviour
                 Analytics.Instance.Send("CheckPointPassRateEndpoint");
             }
             GameManager.ComingFromLastLevel = true;
-            GameManager.Instance.LoadScene("menu");
+            window.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 

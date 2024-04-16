@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndPoint : MonoBehaviour
 {
  
+    public GameObject window;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,7 +43,8 @@ public class EndPoint : MonoBehaviour
                 
 
             }
-            GameManager.Instance.NextLevel();
+            window.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
