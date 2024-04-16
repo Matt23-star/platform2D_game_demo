@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2152141400080636932}
   - component: {fileID: 7322460462233717277}
   - component: {fileID: 9182460232116048635}
-  - component: {fileID: 4230485347603372331}
   - component: {fileID: 3999715978266683959}
   m_Layer: 7
   m_Name: ReachPoint
@@ -122,20 +121,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4230485347603372331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7821738053645218418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e6a0d60022e5f4d87abcb06bed5f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reachText: {fileID: 0}
-  text_: 
 --- !u!114 &3999715978266683959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9442a87dc58e09944b2a842d957c6615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reachText: {fileID: 0}
+  text_: 
+  duration: 2
