@@ -51,11 +51,12 @@ public class playerController : MonoBehaviour
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
         if(GameObject.Find("CheckPointManager"))CheckPointManager.Instance.SetStartpoint(transform.position/*, playerColor*/);
         reachText.SetActive(true);
-        if (SceneManager.GetActiveScene().buildIndex < 4)
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint", 3f));
+            
+            StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint\r\nTry to use <J> to color the blocks", 3f));
         }
-        else { StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint\r\nTry to use <J> to color the blocks", 3f));}
+        else { StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint", 3f)); }
     }
 
     // Update is called once per frame
