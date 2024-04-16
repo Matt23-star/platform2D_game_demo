@@ -30,6 +30,9 @@ public class playerController : MonoBehaviour
     public GameObject reachText;
     private bool isDie = false;
 
+    public bool canJump = true;
+    public float jumpTimer = 0;
+    // public float jumpCD = 0;
 
     //public GameObject overlapCheck;
     public Transform groundCheck;
@@ -61,6 +64,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        jumpTimer += Time.deltaTime;
         if (!isHurt)
         {
             Move();
@@ -86,10 +90,10 @@ public class playerController : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
         } 
-
+        
 
         //Jump once before landing
-        if (Input.GetButtonDown("Jump"))
+        if ((Input.GetButtonDown("Jump"))&&(jumpTimer>=0.3f))
         {
             if (IsGrounded(white_ground))
             {
@@ -107,6 +111,7 @@ public class playerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
+            jumpTimer = 0;
         }
     }
 
