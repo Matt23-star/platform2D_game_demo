@@ -583,16 +583,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Use <A+D> <--> to move
 
-    <Space/W> to jump
+    <Space/W/Up Arrow> to jump
 
-    <K> to switch color,
-    <J> to shot bullet
+    <K/S> to switch
+    color, <J/F> to shot bullet
 
-    The player can collide with the ground only if its color
-    is different from the ground''s.
+    The player can collide with the ground only
+    if its color is different from the ground''s.
 
-    The player can kill the enemy only if its
-    color is different from the enemy''s.'
+    The player can kill the enemy
+    only if its color is different from the enemy''s.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
