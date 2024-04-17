@@ -6,9 +6,9 @@ using UnityEngine;
 public class ReachPoint : MonoBehaviour
 {
     public GameObject reachText;
-    private bool isNotReachedBefore = true;
+    //private bool isNotReachedBefore = true;
     public string text_;
-    public float duration = 2f;
+    public float duration;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,13 +17,13 @@ public class ReachPoint : MonoBehaviour
             Collider2D otherCollider = collision;
             if (otherCollider is BoxCollider2D)
             {
-                CheckPointManager.Instance.SetCheckpoint(transform.position);
+                //CheckPointManager.Instance.SetCheckpoint(transform.position);
                 reachText.SetActive(true); // Make the text visible
                 StartCoroutine(ShowAndFadeCheckpointMessage()); // Show and fade the checkpoint message
-                if (isNotReachedBefore)
-                {
-                    isNotReachedBefore = false;
-                }
+                //if (isNotReachedBefore)
+                //{
+                //    isNotReachedBefore = false;
+                //}
             }
         }
     }
@@ -32,7 +32,7 @@ public class ReachPoint : MonoBehaviour
     {
 
         TextMeshProUGUI checkpointText = reachText.GetComponent<TextMeshProUGUI>();
-        if (!isNotReachedBefore) { yield break; }
+        //if (!isNotReachedBefore) { yield break; }
         checkpointText.text = text_; // Set the text
         checkpointText.alpha = 1; // Make sure the text is fully visible
         checkpointText.fontSize = 20; // Set the font size

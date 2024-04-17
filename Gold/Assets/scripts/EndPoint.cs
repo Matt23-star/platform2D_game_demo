@@ -16,7 +16,7 @@ public class EndPoint : MonoBehaviour
             Collider2D otherCollider = collision;
             if (otherCollider is BoxCollider2D)
             {
-                string currentLevelName = SceneManager.GetActiveScene().name;
+                string currentLevelName = GameManager.Instance.currentLevelName;
 
                 if (currentLevelName.Equals("level 00"))
                 {
