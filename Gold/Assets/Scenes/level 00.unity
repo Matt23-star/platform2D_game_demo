@@ -950,11 +950,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.35
+      value: 15.05
       objectReference: {fileID: 0}
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.38
+      value: -17.35
       objectReference: {fileID: 0}
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5419,7 +5419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: text_
-      value: check point reach
+      value: Try to go left instead of going up!
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: reachText
@@ -5495,9 +5495,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " press K or X \nto switch color\n\n\n\n                                                                             
+  m_text: " press K or S\nto switch color\n\n\n\n                                                                             
     \n\n\n\n                               \n                                  \n                        
-    \n\n                                 space to jump"
+    \n\n        Space or W or Up Arrow to jump"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5506,8 +5506,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5624,7 +5624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: text_
-      value: check point reach
+      value: Checkpoint Reached! Congrats!
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: reachText
@@ -6350,7 +6350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: text_
-      value: check point reach
+      value: Drop down and go right!
       objectReference: {fileID: 0}
     - target: {fileID: 4230485347603372331, guid: fe7e80c6a6ed878479202168be709a93, type: 3}
       propertyPath: reachText

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +12,7 @@ public class EndOfGame : MonoBehaviour
             Collider2D otherCollider = collision;
             if (otherCollider is BoxCollider2D)
             {
-                string currentLevelName = SceneManager.GetActiveScene().name;
+                string currentLevelName = GameManager.Instance.currentLevelName;
                 float elapsedTime = GameManager.Instance.timer;
                 Analytics.Instance.CollectDataCToCTime(elapsedTime, "Endpoint");
                 Debug.Log($"Time to reach endpoint: {elapsedTime} seconds");
