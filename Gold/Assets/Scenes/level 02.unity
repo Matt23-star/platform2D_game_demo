@@ -5132,7 +5132,7 @@ PrefabInstance:
       objectReference: {fileID: 381584527}
     - target: {fileID: 2019538382172205561, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideWindow
+      value: StopPause
       objectReference: {fileID: 0}
     - target: {fileID: 3238750717817427417, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
