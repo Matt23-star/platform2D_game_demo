@@ -355,11 +355,15 @@ public class playerController : MonoBehaviour
                 bulletPrefab.GetComponent<SpriteRenderer>().color = Color.black;
             }
 
-            Vector3 position = transform.position + transform.right; // Generate bullet position relative to transform's position
+            // Determine the direction to shoot based on the player's facing direction
+            Vector3 shootDirection = transform.localScale.x > 0 ? transform.right : -transform.right;
+
+            // Generate bullet position slightly ahead of the player to avoid collision
+            Vector3 position = transform.position + shootDirection;
             GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            bulletRb.velocity = transform.right * bulletSpeed;
+            bulletRb.velocity = shootDirection * bulletSpeed;
 
             // Destroy the bullet after 5 seconds
 
