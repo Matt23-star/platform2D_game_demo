@@ -185,7 +185,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -950,11 +950,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.05
+      value: 13.04
       objectReference: {fileID: 0}
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.35
+      value: -16.33
       objectReference: {fileID: 0}
     - target: {fileID: 2595182801076862320, guid: e40c05dcfa7c84c94b4a7405da0833e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5244,6 +5244,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3842758680787976495, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3842758680787976495, guid: dd10171094bb808419b12e0d472617a7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3966172819479110038, guid: dd10171094bb808419b12e0d472617a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5499,7 +5507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " press K or S\nto switch color\n\n\n\n                                                                             
+  m_text: " Press K or S\nto switch color\n\n\n\n                                                                             
     \n\n\n\n                               \n                                  \n                        
     \n\n        Space or W or Up Arrow to jump"
   m_isRightToLeft: 0
