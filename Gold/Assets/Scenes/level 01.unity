@@ -15935,6 +15935,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2266081833264999192, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: m_Size.y
+      value: 1.9435576
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266081833264999192, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.02822119
+      objectReference: {fileID: 0}
     - target: {fileID: 3461767003645544218, guid: 3b3bce3d0259e4e48a2409a0fe794cae, type: 3}
       propertyPath: m_Color.a
       value: 1
