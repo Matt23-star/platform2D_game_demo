@@ -53,11 +53,11 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Collider2D otherCollider = collision.collider;
-            if (otherCollider is CapsuleCollider2D)
+            if (otherCollider is BoxCollider2D)
             {
                 if (collision.contacts[0].normal.y < 0)
                 {
-                    print(collision.contacts[0].normal.y);
+                    //print(collision.contacts[0].normal.y);
                     if (collision.gameObject.GetComponent<SpriteRenderer>().color != this.gameObject.GetComponent<SpriteRenderer>().color)
                     {
                         if (this.gameObject != null)

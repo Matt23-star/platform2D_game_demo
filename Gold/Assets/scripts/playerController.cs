@@ -221,7 +221,7 @@ public class playerController : MonoBehaviour
             // Check if the collision is on top of the enemy
             if (collision.contacts[0].normal.y > 0.5 && collision.contacts[0].normal.y <1)
             {
-                print("From player : "+ collision.contacts[0].normal.y);
+                //print("From player : "+ collision.contacts[0].normal.y);
                 if ((isWhite && enemyColor.Equals(Color.black)) || (!isWhite && enemyColor.Equals(Color.white)))
                 {
                     // Logic to eliminate the enemy
