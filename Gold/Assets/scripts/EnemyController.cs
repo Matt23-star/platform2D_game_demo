@@ -29,12 +29,22 @@ public class EnemyController : MonoBehaviour
 
     void Movement()
     {
+        // Determine the direction to move based on the current movingRight state
+        float moveDirection = movingRight ? 1 : -1;
         if (movingRight)
         {
+            // Flip the x scale to match the direction of movement
+            transform.localScale = new Vector3(moveDirection * Mathf.Abs(transform.localScale.x),
+                                               transform.localScale.y,
+                                               transform.localScale.z);
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
         else
         {
+            // Flip the x scale to match the direction of movement
+            transform.localScale = new Vector3(moveDirection * Mathf.Abs(transform.localScale.x),
+                                               transform.localScale.y,
+                                               transform.localScale.z);
             rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
 
@@ -53,7 +63,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Collider2D otherCollider = collision.collider;
-            if (otherCollider is BoxCollider2D)
+            if (otherCollider is BoxCollider2D || otherCollider is CapsuleCollider2D)
             {
                 if (collision.contacts[0].normal.y < 0)
                 {
@@ -62,8 +72,8 @@ public class EnemyController : MonoBehaviour
                     {
                         if (this.gameObject != null)
                         {
-                            Analytics.Instance.CollectDataEnemyName(this.gameObject.name);
-                            Analytics.Instance.Send("EnemykillingRate");
+                            //Analytics.Instance.CollectDataEnemyName(this.gameObject.name);
+                            //Analytics.Instance.Send("EnemykillingRate");
                             Destroy(this.gameObject);
                         }
                     }

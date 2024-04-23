@@ -42,8 +42,10 @@ public class playerController : MonoBehaviour
     public LayerMask block;
     private float bulletSpeed = 10f;
 
-    //Analytics variables
-    
+    private Transform leftEye;
+    private Transform rightEye;
+
+
 
     void Start()
     {
@@ -53,10 +55,13 @@ public class playerController : MonoBehaviour
         Color playerColor = GetComponent<SpriteRenderer>().color;
         isWhite = playerColor == Color.white; // Assuming white is the default color for 'white' state
         if(GameObject.Find("CheckPointManager"))CheckPointManager.Instance.SetStartpoint(transform.position/*, playerColor*/);
+        // Find the child sprites by name and change their color
+        leftEye = transform.Find("Left Eye");
+        rightEye = transform.Find("Right Eye");
         //reachText.SetActive(true);
         //if (SceneManager.GetActiveScene().buildIndex == 3)
         //{
-            
+
         //    StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint\r\nTry to use <F>/<J> to color the blocks", 3f));
         //}
         //else { StartCoroutine(ShowAndFadeMessage("Reach to the Green Endpoint and Use the Yellow Checkpoint", 3f)); }
@@ -90,6 +95,10 @@ public class playerController : MonoBehaviour
         if (horizontalMove!=0)
         {
             rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+            // Flip the x scale to match the direction of movement
+            transform.localScale = new Vector3(Mathf.Sign(horizontalMove) * Mathf.Abs(transform.localScale.x),
+                                               transform.localScale.y,
+                                               transform.localScale.z);
         } 
         
 
@@ -129,6 +138,8 @@ public class playerController : MonoBehaviour
             if (isWhite)
             {
                 GetComponent<SpriteRenderer>().color = Color.black;
+                leftEye.GetComponent<SpriteRenderer>().color = Color.white;
+                rightEye.GetComponent<SpriteRenderer>().color = Color.white;
                 isWhite = false;
                 // print("white" + CheckOverlap(white_ground).ToString());
                 if (CheckOverlap(white_ground))
@@ -140,6 +151,8 @@ public class playerController : MonoBehaviour
             else
             {
                 GetComponent<SpriteRenderer>().color = Color.white;
+                leftEye.GetComponent<SpriteRenderer>().color = Color.black;
+                rightEye.GetComponent<SpriteRenderer>().color = Color.black;
                 isWhite = true;
                 // print("black" + CheckOverlap(black_ground).ToString());
                 if (CheckOverlap(black_ground))
@@ -267,8 +280,8 @@ public class playerController : MonoBehaviour
             if (!isDie)
             {
                 isDie = true;
-                Analytics.Instance.CollectDataDeathLoc(transform.position);
-                Analytics.Instance.Send("LocationOfDeath");
+                //Analytics.Instance.CollectDataDeathLoc(transform.position);
+                //Analytics.Instance.Send("LocationOfDeath");
             }
             //GameManager.Instance.RestartLevel();
             hp = 3;
